@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const axios = require('axios');
 
 const SALT_ROUNDS = 5;
-
+//need to add email in the sign up page
 const User = db.define('user', {
   username: {
     type: Sequelize.STRING,
@@ -14,6 +14,19 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
+  },
+  email: {
+    type: Sequelize.STRING,
+    isEmail: true,
+    unique: true
+  },
+  userType: {
+    type: Sequelize.ENUM ('customer', 'admin'),
+    defaultValue: 'customer'
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
