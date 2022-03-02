@@ -12,8 +12,8 @@ class SingleProduct extends React.Component {
     return (
       <div id="single-product">
         <div id="product-details">
-          <h4>Name: {product.productName}</h4>
-          <ul>Vintage: {product.vintage}</ul>
+          <h4>Name: {product.name}</h4>
+          <ul>Vintage: {product.year}</ul>
           <ul>Description: {product.description}</ul>
           <img src={product.imageURL} />
         </div>
