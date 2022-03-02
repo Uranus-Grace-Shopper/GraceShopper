@@ -1,16 +1,20 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-const Product  = db.define('product', {
-  productName: {
+const Product = db.define("product", {
+  name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
-  vintage: {
+  year: {
     type: Sequelize.INTEGER,
+    validate: {
+      min: 2000,
+      max: 2022
+    }
   },
   variety: {
-    type: Sequelize.ENUM('red','white'),
+    type: Sequelize.ENUM("red", "white"),
   },
   winery: {
     type: Sequelize.STRING,
@@ -19,15 +23,16 @@ const Product  = db.define('product', {
     type: Sequelize.TEXT,
   },
   quantity: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
   },
   price: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.DECIMAL,
   },
   imageURL: {
-      type: Sequelize.STRING,
-      defaultValue: 'https://i.pinimg.com/originals/d7/a1/27/d7a127c2fd32d8e3dae3164a9f71a177.jpg'
-  }
-})
+    type: Sequelize.STRING,
+    defaultValue:
+      "https://i.pinimg.com/originals/d7/a1/27/d7a127c2fd32d8e3dae3164a9f71a177.jpg",
+  },
+});
 
-module.exports = Product
+module.exports = Product;
