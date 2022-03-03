@@ -33,6 +33,9 @@ async function seed() {
 
   // await products[0].addCart()
   await carts[0].addProduct(products[0])
+  await carts[0].addProduct(products[1])
+  await carts[2].addProduct(products[2])
+
   // set cart to see user connect to cart
 
   // Creating CartItems
