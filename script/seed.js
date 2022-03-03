@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User, Product} } = require('../server/db')
+const {db, models: {User, Product, Cart, CartItems} } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -9,6 +9,8 @@ const {db, models: {User, Product} } = require('../server/db')
 async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
+  console.log("this is magic methods", Object.keys(Product.prototype))
+
 
   // Creating Users
   const users = await Promise.all([
@@ -21,6 +23,24 @@ async function seed() {
     Product.create({ name: 'Deerfield Ranch', year: 2016, variety:'red',winery: 'Deerfield Ranch',description: 'this boozy bold blend would benefit from a suitable food pairing. Rob reallllly liked', quantity: 20, price:139.39}),
     Product.create({ name: 'Beringer', year: 2019, variety:'red',winery: 'Knights Valley ',description: 'The 2019 Knights Valley Reserve Cabernet showcases layers of black fruits, red plums, spiced cedar, savoury herbs, toasty vanilla and liquorice play beautiful music together.', quantity: 20, price:39.39,imageURL:'http://res.cloudinary.com/winecom/image/upload/pmdtpah3dqvmdrq8n6ik'}),
   ])
+
+  // Creating Cart
+  const carts = await Promise.all([
+    Cart.create({}),
+    Cart.create({}),
+    Cart.create({})
+  ])
+
+  // await products[0].addCart()
+  await carts[0].addProduct(products[0])
+  // set cart to see user connect to cart
+
+  // Creating CartItems
+  // const cartItems = await Promise.all([
+  //   CartItems.create({productQuantity: 3}),
+  //   CartItems.create({productQuantity: 4}),
+  //   CartItems.create({productQuantity: 5})
+  // ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
