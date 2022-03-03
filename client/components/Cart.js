@@ -40,14 +40,16 @@ class Cart extends React.Component {
         <h1 className="title"> Your Cart</h1>
         <div className="cart-container">
           {cartItems.map((cartItem) => (
-            <div key={cartItem.id}>
+            <div key={cartItem.id} className="cart-item-container">
               <img src={cartItem.imageURL} />
               <Link to={`/products/${cartItem.id}`}>
                 <h4>
                   {cartItem.name} {cartItem.year}
                 </h4>
               </Link>
+              <button className="btn-cart-qty">+</button>
               <ul>{cartItem.quantity}</ul>
+              <button className="btn-cart-qty">-</button>
             </div>
           ))}
         </div>

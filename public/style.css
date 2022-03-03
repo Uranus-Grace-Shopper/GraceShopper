@@ -20,7 +20,7 @@ form div {
   display: inline-block;
 }
 
-.container{
+.container {
   display: flex;
   margin: 50px;
   flex-direction: row;
@@ -30,4 +30,35 @@ form div {
   align-items: stretch;
   align-content: flex-start;
   gap: 50px 100px;
-  }
+}
+
+img {
+  width: 50px;
+  padding: 20px;
+}
+
+nav {
+  align-items: center;
+  background-color: #aad5d7;
+  color: #264e70;
+  display: flex;
+  justify-content: space-around;
+  height: 100px;
+}
+
+.cart-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #aad5d7;
+  margin: 20px;
+}
+
+.title {
+  padding: 50px;
+  text-align: center;
+  color: #aad5d7;
+  font-size: 2em;
+  letter-spacing: 0.25em;
+  font-weight: 700;
+}
