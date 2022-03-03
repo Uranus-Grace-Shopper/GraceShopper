@@ -1,10 +1,19 @@
-const router = require('express').Router()
-const { models: { Product }} = require('../db')
+const router = require('express').Router();
+const { models: { Product, Winery }} = require('../db');
+const { Op } = require('@sequelize/core');
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const products = await Product.findAll()
+    const products = await Product.findAll({
+        where: {
+          quantity: {
+                [Op.gt]: 0
+          }
+        },
+      include: Winery,
+    
+    })
     res.json(products)
   } catch (err) {
     next(err)
