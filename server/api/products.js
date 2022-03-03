@@ -12,7 +12,6 @@ router.get('/', async (req, res, next) => {
           }
         },
       include: Winery,
-    
     })
     res.json(products)
   } catch (err) {

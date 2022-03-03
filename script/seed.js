@@ -31,7 +31,7 @@ async function seed() {
      year: 2016, 
      variety:'red',
       description: 'this boozy bold blend would benefit from a suitable food pairing. Rob reallllly liked', 
-      quantity: 20, 
+      quantity: 0, 
       price:139.39}),
     Product.create({ 
       name: 'Carneros', 
