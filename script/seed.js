@@ -17,9 +17,9 @@ async function seed() {
   ])
  // Creating Products
   const products = await Promise.all([
-    Product.create({ productName: 'Buena Vista', vintage: 2018, variety:'red',winery: 'Buena Vista',description: 'Blackberry,plum,dark chocolate', quantity: 20, price:39.54,imageURL:'https://images.vivino.com/thumbs/f7tR4MRISRWWdrXFoGzG_w_pb_x600.png'}),
-    Product.create({ productName: 'Deerfield Ranch', vintage: 2016, variety:'red',winery: 'Deerfield Ranch',description: 'this boozy bold blend would benefit from a suitable food pairing. Rob reallllly liked', quantity: 20, price:139.39}),
-    Product.create({ productName: 'Beringer', vintage: 2019, variety:'red',winery: 'Knights Valley ',description: 'The 2019 Knights Valley Reserve Cabernet showcases layers of black fruits, red plums, spiced cedar, savoury herbs, toasty vanilla and liquorice play beautiful music together.', quantity: 20, price:39.39,imageURL:'http://res.cloudinary.com/winecom/image/upload/pmdtpah3dqvmdrq8n6ik'}),
+    Product.create({ name: 'Buena Vista', year: 2018, variety:'red',winery: 'Buena Vista',description: 'Blackberry,plum,dark chocolate', quantity: 20, price:39.54,imageURL:'https://images.vivino.com/thumbs/f7tR4MRISRWWdrXFoGzG_w_pb_x600.png'}),
+    Product.create({ name: 'Deerfield Ranch', year: 2016, variety:'red',winery: 'Deerfield Ranch',description: 'this boozy bold blend would benefit from a suitable food pairing. Rob reallllly liked', quantity: 20, price:139.39}),
+    Product.create({ name: 'Beringer', year: 2019, variety:'red',winery: 'Knights Valley ',description: 'The 2019 Knights Valley Reserve Cabernet showcases layers of black fruits, red plums, spiced cedar, savoury herbs, toasty vanilla and liquorice play beautiful music together.', quantity: 20, price:39.39,imageURL:'http://res.cloudinary.com/winecom/image/upload/pmdtpah3dqvmdrq8n6ik'}),
   ])
 
   console.log(`seeded ${users.length} users`)
