@@ -1,17 +1,16 @@
 "use strict";
 
-const {
-  db,
-  models: { User, Product, Winery },
-} = require("../server/db");
+
+const {db, models: {User, Product, Winery, Cart, CartItems} } = require('../server/db')
+
 
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
 async function seed() {
-  await db.sync({ force: true }); // clears db and matches models to tables
-  console.log("db synced!");
+  await db.sync({ force: true }) // clears db and matches models to tables
+  console.log('db synced!')
 
   // Creating Users
   const users = await Promise.all([
@@ -84,6 +83,31 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
+
+  // Creating Cart
+  const carts = await Promise.all([
+    Cart.create({}),
+    Cart.create({}),
+    Cart.create({})
+  ])
+
+  // await products[0].addCart()
+  await carts[0].addProduct(products[0])
+  await carts[0].addProduct(products[1])
+  await carts[2].addProduct(products[2])
+
+  // set cart to see user connect to cart
+
+  // Creating CartItems
+  // const cartItems = await Promise.all([
+  //   CartItems.create({productQuantity: 3}),
+  //   CartItems.create({productQuantity: 4}),
+  //   CartItems.create({productQuantity: 5})
+  // ])
+
+  console.log(`seeded ${users.length} users`)
+  console.log(`seeded successfully`)
+
   return {
     users: {
       cody: users[0],
