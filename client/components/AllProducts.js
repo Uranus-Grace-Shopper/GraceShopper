@@ -9,9 +9,7 @@ class AllProducts extends React.Component {
     this.props.getProducts();
   }
   render() {
-    console.log("im in winery render");
     const products = this.props.allProducts;
-    //console.log("products", products);
     return (
       <div>
         <div className="container">

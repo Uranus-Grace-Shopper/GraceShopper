@@ -26,7 +26,7 @@ module.exports = {
   models: {
     User,
     Product,
-    Winery
+    Winery,
     Cart,
     CartItems
   },
