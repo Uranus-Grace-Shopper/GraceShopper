@@ -16,9 +16,6 @@ const Product = db.define("product", {
   variety: {
     type: Sequelize.ENUM("red", "white"),
   },
-  winery: {
-    type: Sequelize.STRING,
-  },
   description: {
     type: Sequelize.TEXT,
   },
