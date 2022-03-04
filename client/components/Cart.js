@@ -1,43 +1,25 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchProducts } from "../store/products";
+import { fetchCart } from "../store/cart";
 import { Link } from "react-router-dom";
 
 class Cart extends React.Component {
-  //   componentDidMount() {
-  //     this.props.getProducts();
-  //   }
+  componentDidMount() {
+    this.props.getCart(this.props.match.params.id);
+  }
   render() {
-    const cartItems = [
-      {
-        id: 1,
-        name: "Buena Vista",
-        year: 2018,
-        variety: "red",
-        winery: "Buena Vista",
-        description: "Blackberry,plum,dark chocolate",
-        quantity: 1,
-        price: 39.54,
-        imageURL:
-          "https://images.vivino.com/thumbs/f7tR4MRISRWWdrXFoGzG_w_pb_x600.png",
-      },
-      {
-        id: 2,
-        name: "Deerfield Ranch",
-        year: 2016,
-        variety: "red",
-        winery: "Deerfield Ranch",
-        description:
-          "this boozy bold blend would benefit from a suitable food pairing. Rob reallllly liked",
-        quantity: 20,
-        price: 139.39,
-        imageURL:
-          "http://res.cloudinary.com/winecom/image/upload/pmdtpah3dqvmdrq8n6ik",
-      },
-    ];
+    const cartItems = this.props.cart.products || [];
+    console.log("cartItems >>>>>>>>>>>", cartItems);
     return (
       <div>
         <h1 className="title"> Your Cart</h1>
+        <div className="cart-headings">
+          <ul>Product</ul>
+          <ul>Quantity</ul>
+          <ul>Unit Price</ul>
+          <ul>Total Price</ul>
+        </div>
+
         <div className="cart-container">
           {cartItems.map((cartItem) => (
             <div key={cartItem.id} className="cart-item-container">
@@ -48,28 +30,30 @@ class Cart extends React.Component {
                 </h4>
               </Link>
               <button className="btn-cart-qty">+</button>
-              <ul>{cartItem.quantity}</ul>
+              <ul>qty</ul>
               <button className="btn-cart-qty">-</button>
+              <button className="btn-cart-delete">Delete</button>
+              <ul>{cartItem.price}</ul>
+              <ul>{cartItem.price * 3}</ul>
             </div>
           ))}
         </div>
+        <button>checkout</button>
       </div>
     );
   }
 }
 
-// const mapState = (state) => {
-//   return {
-//     allProducts: state.products,
-//   };
-// };
+const mapState = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
 
-// const mapDispatch = (dispatch) => {
-//   return {
-//     getProducts: () => dispatch(fetchProducts()),
-//   };
-// };
+const mapDispatch = (dispatch) => {
+  return {
+    getCart: (id) => dispatch(fetchCart(id)),
+  };
+};
 
-// export default connect(mapState, mapDispatch)(Cart);
-
-export default Cart;
+export default connect(mapState, mapDispatch)(Cart);

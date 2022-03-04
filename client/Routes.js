@@ -37,7 +37,7 @@ class Routes extends Component {
               path="/products/:productId"
               component={SingleProduct}
             />
-            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/cart/:id" component={Cart} />
           </Switch>
         )}
       </div>
