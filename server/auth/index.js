@@ -13,7 +13,13 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
-    const user = await User.create(req.body)
+    /* desconstructs req.body so users can not inject data 
+    with postman to force themselves to be admin */
+    const { username, password }  = req.body;
+    //if user creates user with postman, only username and password would be successfully created. 
+    //isAdmin will be defaulted to false
+    const user = await User.create( { username, password } )
+
     res.send({token: await user.generateToken()})
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
