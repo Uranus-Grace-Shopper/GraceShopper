@@ -1,5 +1,6 @@
 body {
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 a {
@@ -20,7 +21,7 @@ form div {
   display: inline-block;
 }
 
-.container{
+.container {
   display: flex;
   margin: 50px;
   flex-direction: row;
@@ -30,4 +31,64 @@ form div {
   align-items: stretch;
   align-content: flex-start;
   gap: 50px 100px;
-  }
+}
+
+img {
+  width: auto;
+  height: 50px;
+  padding: 20px;
+}
+
+nav {
+  align-items: center;
+  background-color: #aad5d7;
+  color: #264e70;
+  display: flex;
+  justify-content: space-around;
+  height: 100px;
+}
+
+.cart-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #aad5d7;
+  margin: 20px;
+}
+
+.title {
+  padding: 50px;
+  text-align: center;
+  color: #aad5d7;
+  font-size: 2em;
+  letter-spacing: 0.25em;
+  font-weight: 700;
+}
+
+.cart-headings {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.btn-large {
+  margin: 25px;
+  outline: none;
+  width: 160px;
+  height: 45px;
+  padding: 10px 25px;
+  border: 2px solid #7e2655;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.btn-large:hover {
+  border: none;
+  color: #2d3235;
+  background: #aad5d7;
+}
