@@ -1,7 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCart } from "../store/cart";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+import history from '../history';
+
+
+
 
 class Cart extends React.Component {
   constructor() {
@@ -10,15 +14,27 @@ class Cart extends React.Component {
       cartItemQty: 1,
       cartItemTotal: null,
       QtyError: "",
+      content: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.validateQty = this.validateQty.bind(this);
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
     this.props.getCart(this.props.userInfo);
   }
 
+  handleClick(id) {
+      let storageCartItems = JSON.parse(localStorage.getItem('Cart'));
+      let Cart = storageCartItems.filter(cartItem => cartItem.id !== id );
+      localStorage.setItem('Cart', JSON.stringify(Cart));
+      const content = localStorage.getItem("Cart")
+      this.setState({content})
+      
+  }
+
+  
   //needs an update
   handleChange(event) {
     if (this.validateQty()) {
@@ -78,7 +94,7 @@ class Cart extends React.Component {
                     value={this.state.cartItemQty}
                   />
                   <button className="btn-cart-qty">-</button>
-                  <button className="btn-cart-delete">Delete</button>
+                  <button className="btn-cart-delete" onClick={ () => this.handleClick(cartItem.id)}>Delete</button>
                   <ul>{cartItem.price}</ul>
                   <ul>{cartItem.price * this.state.cartItemQty}</ul>
                 </div>

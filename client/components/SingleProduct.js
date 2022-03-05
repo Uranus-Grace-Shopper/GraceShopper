@@ -18,12 +18,13 @@ class SingleProduct extends React.Component {
    // if (this.props.isLoggedIn) {
       //if there is a cart
       if (localStorage.length > 0) {
-        let cart = [];
+        // let cart = [];
         if (localStorage.getItem("Cart")) {
-          cart = JSON.parse(localStorage.getItem("Cart"));
+          let content = JSON.parse(localStorage.getItem("Cart"));
+          content.push(this.props.singleProduct);
+          localStorage.setItem("Cart", JSON.stringify(content));
         }
-        cart.push(this.props.singleProduct);
-        localStorage.setItem("Cart", JSON.stringify(cart));
+        
       } else {
         const content = [];
         localStorage.setItem("Cart", content);
