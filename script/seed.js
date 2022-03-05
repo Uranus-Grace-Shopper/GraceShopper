@@ -100,6 +100,8 @@ async function seed() {
   // seed relationship btw Cart and User
   await users[0].setCarts(carts[0]);
 
+  
+
   // set cart to see user connect to cart
 
   // Creating CartItems

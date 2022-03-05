@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCart } from "../store/cart";
+import { fetchCart, checkoutCart } from "../store/cart";
 import { Link } from "react-router-dom";
 
 class Cart extends React.Component {
@@ -10,6 +10,10 @@ class Cart extends React.Component {
       cartItemQty: 1,
       cartItemTotal: null,
       QtyError: "",
+      isPurchased: false
+      // cart: [{name: "Beringer",
+      // year: 2019,
+      // variety: "red",}]
     };
     this.handleChange = this.handleChange.bind(this);
     this.validateQty = this.validateQty.bind(this);
@@ -25,8 +29,17 @@ class Cart extends React.Component {
       this.setState({
         [event.target.name]: event.target.value,
       });
-      console.log(this.state);
+      //console.log(this.state);
     }
+  }
+  //the add-to-cart button will use localStorage.setItem('cart',JSON.stringify(this.state.cart)) 
+  //logged-in
+  handleSubmit(event){
+    event.preventDefault();
+    this.state.isPurchased = true
+    this.props.checkoutCart({
+      ...this.state.isPurchased,
+    });
   }
 
   //needs an update
@@ -57,6 +70,7 @@ class Cart extends React.Component {
           <ul>Total Price</ul>
         </div>
 
+        <form onSubmit={this.handleSubmit}>
         <div className="cart-container">
           {cartItems.map((cartItem) => (
             <div key={cartItem.id} className="cart-item-container">
@@ -78,8 +92,9 @@ class Cart extends React.Component {
               <ul>{cartItem.price * this.state.cartItemQty}</ul>
             </div>
           ))}
-        </div>
-        <button className="btn-large">CHECKOUT</button>
+        </div> 
+        <button className="btn-large" type="submit">CHECKOUT</button>
+        </form>
       </div>
     );
   }
@@ -94,6 +109,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getCart: (id) => dispatch(fetchCart(id)),
+    checkOut: (cart) => dispatch(checkoutCart(cart))
   };
 };
 

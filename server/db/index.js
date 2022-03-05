@@ -19,6 +19,10 @@ Cart.belongsTo(User)
 Product.belongsToMany( Cart, { through: CartItems})
 Cart.belongsToMany( Product, {through: CartItems})
 
+Cart.hasMany(CartItems)
+CartItems.belongsTo(Cart)
+Product.hasMany(CartItems)
+CartItems.belongsTo(Product)
 
 
 module.exports = {
