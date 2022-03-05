@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
 import { Link } from "react-router-dom";
-import Winery from "./Winery"
+import Winery from "./Winery";
 
 class AllProducts extends React.Component {
   componentDidMount() {
@@ -12,16 +12,21 @@ class AllProducts extends React.Component {
     const products = this.props.allProducts;
     return (
       <div>
-        <div className="container">
+        <div className="div-all-products">
           {products.map((product) => (
-            <div key={product.id}>
-              <Link to={`/products/${product.id}`}>
-                <h4>Name: {product.name}</h4>
-              </Link>
-              <ul>Winery:<Winery winery = {product.winery}/></ul>
-              <ul>Vintage: {product.year}</ul>
-              <ul>Description: {product.description}</ul>
-              <img src={product.imageURL} />
+            <div key={product.id} className="div-each-product">
+              <img className="img-all-products" src={product.imageURL} />
+              <div className="txt-each-product">
+                <div>
+                  <Winery winery={product.winery} />
+                </div>
+                <Link to={`/products/${product.id}`}>
+                  <p className="product-name">
+                    {product.name} {product.year}
+                  </p>
+                </Link>
+              </div>
+              <button className="btn-large">ADD TO CART</button>
             </div>
           ))}
         </div>

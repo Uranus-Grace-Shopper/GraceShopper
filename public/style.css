@@ -26,16 +26,41 @@ form div {
   display: inline-block;
 }
 
-.container {
+.div-all-products {
   display: flex;
   margin: 50px;
   flex-direction: row;
   flex-wrap: wrap;
   flex-flow: row wrap;
-  justify-content: flex-start;
-  align-items: stretch;
-  align-content: flex-start;
+  justify-content: center;
   gap: 50px 100px;
+}
+
+.img-all-products {
+  align-self: center;
+  width: auto;
+  height: 200px;
+}
+
+.div-each-product {
+  padding: 1rem;
+  width: 350px;
+  height: 400px;
+  /* background: #e2f6f7; */
+  display: flex;
+  flex-direction: column;
+}
+
+.txt-each-product {
+  align-self: center;
+}
+
+.div-each-product .btn-large {
+  align-self: center;
+}
+
+.product-name {
+  font-weight: bold;
 }
 
 img {
@@ -103,4 +128,25 @@ nav {
   margin: 0px;
   width: 20%;
   height: 20%;
+}
+
+.img-main {
+  width: 100%;
+  height: auto;
+  margin: 0px;
+  padding: 0px;
+  opacity: 0.8;
+}
+
+#welcome-text {
+  font-family: "Lato", sans-serif;
+  letter-spacing: 0.2em;
+  text-align: center;
+  font-size: 60px;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(255, 255, 255);
+  text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
 }

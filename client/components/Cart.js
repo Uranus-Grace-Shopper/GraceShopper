@@ -16,7 +16,7 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getCart(this.props.match.params.id);
+    this.props.getCart(this.props.userInfo);
   }
 
   //needs an update
@@ -45,49 +45,54 @@ class Cart extends React.Component {
   }
 
   render() {
-    const cartItems = this.props.cart.products || [];
-    console.log("cartItems >>>>>>>>>>>", cartItems);
-    return (
-      <div>
-        <h1 className="title"> Your Cart</h1>
-        <div className="cart-headings">
-          <ul>Product</ul>
-          <ul>Quantity</ul>
-          <ul>Unit Price</ul>
-          <ul>Total Price</ul>
-        </div>
+    const cart = this.props.cart[0];
+    if (cart) {
+      const cartItems = cart.products;
+      return (
+        <div>
+          <h1 className="title"> Your Cart</h1>
+          <div className="cart-headings">
+            <ul>Product</ul>
+            <ul>Quantity</ul>
+            <ul>Unit Price</ul>
+            <ul>Total Price</ul>
+          </div>
 
-        <div className="cart-container">
-          {cartItems.map((cartItem) => (
-            <div key={cartItem.id} className="cart-item-container">
-              <img src={cartItem.imageURL} />
-              <Link to={`/products/${cartItem.id}`}>
-                <h4>
-                  {cartItem.name} {cartItem.year}
-                </h4>
-              </Link>
-              <button className="btn-cart-qty">+</button>
-              <input
-                name="cartItemQty"
-                onChange={this.handleChange}
-                value={this.state.cartItemQty}
-              />
-              <button className="btn-cart-qty">-</button>
-              <button className="btn-cart-delete">Delete</button>
-              <ul>{cartItem.price}</ul>
-              <ul>{cartItem.price * this.state.cartItemQty}</ul>
-            </div>
-          ))}
+          <div className="cart-container">
+            {cartItems.map((cartItem) => (
+              <div key={cartItem.id} className="cart-item-container">
+                <img src={cartItem.imageURL} />
+                <Link to={`/products/${cartItem.id}`}>
+                  <h4>
+                    {cartItem.name} {cartItem.year}
+                  </h4>
+                </Link>
+                <button className="btn-cart-qty">+</button>
+                <input
+                  name="cartItemQty"
+                  onChange={this.handleChange}
+                  value={this.state.cartItemQty}
+                />
+                <button className="btn-cart-qty">-</button>
+                <button className="btn-cart-delete">Delete</button>
+                <ul>{cartItem.price}</ul>
+                <ul>{cartItem.price * this.state.cartItemQty}</ul>
+              </div>
+            ))}
+          </div>
+          <button className="btn-large">CHECKOUT</button>
         </div>
-        <button className="btn-large">CHECKOUT</button>
-      </div>
-    );
+      );
+    } else {
+      return <div>nothing in the cart</div>;
+    }
   }
 }
 
 const mapState = (state) => {
   return {
     cart: state.cart,
+    userInfo: state.auth,
   };
 };
 

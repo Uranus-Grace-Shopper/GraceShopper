@@ -12,11 +12,11 @@ const setCart = (cart) => {
 };
 
 //fetch individual cart thunk
-export const fetchCart = (id) => {
+export const fetchCart = (userInfo) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/api/cart/${id}`);
-      console.log("axios data for cart>>>>", data);
+      const { data } = await axios.post(`/api/cart/`, userInfo);
+      // console.log("data >>>>>>>>", data);
       dispatch(setCart(data));
     } catch (err) {
       console.log(err);
