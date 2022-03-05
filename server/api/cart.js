@@ -4,12 +4,23 @@ const {
 } = require("../db");
 module.exports = router;
 
-router.get("/:id", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
-    const cart = await Cart.findByPk(req.params.id, {
-      include: Product,
-    });
-    res.send(cart);
+    const userId = req.body.id;
+
+    //guest cart
+    // if(!userId) {
+
+    // }
+    if (userId) {
+      const cart = await Cart.findAll({
+        where: {
+          userId: userId,
+        },
+        include: Product,
+      });
+      res.send(cart);
+    }
   } catch (e) {
     next(e);
   }
