@@ -40,6 +40,11 @@ class Cart extends React.Component {
     }
   }
 
+  handleClickCheckout() {
+    localStorage.removeItem("Cart");
+    this.setState({content: []})
+  }
+
   //needs an update
   validateQty() {
     let QtyError = "";
@@ -104,7 +109,9 @@ class Cart extends React.Component {
                 </div>
               ))}
             </div>
-            <button className="btn-large">CHECKOUT</button>
+            <Link to={`/cart/checkout`}>
+            <button className="btn-large" onClick={()=> this.handleClickCheckout()}>CHECKOUT</button>
+            </Link>
           </div>
         );
       }
