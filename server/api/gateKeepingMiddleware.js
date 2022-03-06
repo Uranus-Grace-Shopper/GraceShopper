@@ -1,11 +1,13 @@
 const { models: { User } } = require("../db");
 
+
 /* store functions that will act as middleware between
  our request and our response. */
 
  const requireToken = async (req, res, next) => {
      try {
-        //const token = req.headers.authorization;
+        const token = req.headers.authorization;
+        console.log('token>>>>>>>>>>>',req.headers.authorization)
         const user = await User.findByToken(token);
         req.user = user;
         next()

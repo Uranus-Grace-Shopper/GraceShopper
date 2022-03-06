@@ -27,6 +27,19 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.post("/checkout", async (req, res, next) => {
+  try {
+    console.log('req.body in checkout==========================',req.body)
+    const cart = await Cart.create({isPurchased:true});
+ // await cart.addProduct(req.body) 
+    //const products = await Product.findByPk(cart.product.id);
+    //products.quantity = products.quantity - cart.product.productQuantity;
+    //send new produts quantity to front end to update the state?
+    res.sendStatus(201);
+  } catch (e) {
+    next(e);
+  }
+});
 //logged in user
 
 router.post("/add/:productId", async (req, res, next) => {
@@ -75,137 +88,3 @@ router.post("/add/:productId", async (req, res, next) => {
   }
 });
 
-// router.put("/checkout/:userId", async (req, res, next) => {
-//   try {
-//     //if user exists, find the cart
-
-//     const cart = await Cart.findByPk(1, {
-//       include: [
-//         {
-//           model: Product,
-//         },
-//       ],
-//     });
-
-//     //  const cartItems = await CartItems.findAll( {
-
-//     //    //where: {cartId:cart.id}
-
-//     //  });
-
-//     //const products = await Product.findByPk(cartItems.productId)
-
-//     //const products = await Product.findByPk(cart.products);
-
-//     // console.log('products',cartItems.productId)
-
-//     // cart.isPurchased = true;
-
-//     //substract quantity in product table
-
-//     //products.quantity = products.quantity - cart.product.productQuantity;
-
-//     //send new produts quantity to front end to update the state?
-
-//     res.send(await cart.update(req.body));
-//   } catch (e) {
-//     next(e);
-//   }
-// });
-
-// //guste user
-
-// router.post("/checkout/:userId", async (req, res, next) => {
-//   try {
-//     //req.body = localStorage.getItem();
-
-//     const cart = await Cart.create(req.body);
-
-//     cart.isPurchased = true;
-
-//     //const products = await Product.findByPk(cart.product.id);
-
-//     //products.quantity = products.quantity - cart.product.productQuantity;
-
-//     //send new produts quantity to front end to update the state?
-
-//     res.send(cart);
-//   } catch (e) {
-//     next(e);
-//   }
-// });
-
-
-// router.get("/:id", async (req, res, next) => {
-//   try {
-//     const cart = await Cart.findByPk(req.params.id, {
-//       include: Product,
-//     });
-
-//     res.send(cart);
-//   } catch (e) {
-//     next(e);
-//   }
-// });
-
-
-
-// router.put("/checkout/:userId", async (req, res, next) => {
-//   try {
-//     //if user exists, find the cart
-
-//     const cart = await Cart.findByPk(1, {
-//       include: [
-//         {
-//           model: Product,
-//         },
-//       ],
-//     });
-
-    //  const cartItems = await CartItems.findAll( {
-
-    //    //where: {cartId:cart.id}
-
-    //  });
-
-    //const products = await Product.findByPk(cartItems.productId)
-
-    //const products = await Product.findByPk(cart.products);
-
-    // console.log('products',cartItems.productId)
-
-    // cart.isPurchased = true;
-
-    //substract quantity in product table
-
-    //products.quantity = products.quantity - cart.product.productQuantity;
-
-    //send new produts quantity to front end to update the state?
-
-//     res.send(await cart.update(req.body));
-//   } catch (e) {
-//     next(e);
-//   }
-// });
-
-//guste user
-
-// router.post("/checkout/:userId", async (req, res, next) => {
-//   try {
-//     //req.body = localStorage.getItem();
-
-//     const cart = await Cart.create(req.body);
-
-//     cart.isPurchased = true;
-
-//     //const products = await Product.findByPk(cart.product.id);
-
-//     //products.quantity = products.quantity - cart.product.productQuantity;
-
-//     //send new produts quantity to front end to update the state?
-
-//     res.send(cart);
-//   } catch (e) {
-//     next(e);
-//   }
-// });

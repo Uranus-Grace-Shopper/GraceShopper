@@ -1,11 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCart } from "../store/cart";
-import { Link} from "react-router-dom";
-import history from '../history';
-
-
-
+import { fetchCart,checkoutAll } from "../store/cart";
+import { Link } from "react-router-dom";
+import history from "../history";
 
 class Cart extends React.Component {
   constructor() {
@@ -14,11 +11,12 @@ class Cart extends React.Component {
       cartItemQty: 1,
       cartItemTotal: null,
       QtyError: "",
-      content: []
+      content: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.validateQty = this.validateQty.bind(this);
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -26,15 +24,13 @@ class Cart extends React.Component {
   }
 
   handleClick(id) {
-      let storageCartItems = JSON.parse(localStorage.getItem('Cart'));
-      let Cart = storageCartItems.filter(cartItem => cartItem.id !== id );
-      localStorage.setItem('Cart', JSON.stringify(Cart));
-      const content = localStorage.getItem("Cart")
-      this.setState({content})
-      
+    let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
+    let Cart = storageCartItems.filter((cartItem) => cartItem.id !== id);
+    localStorage.setItem("Cart", JSON.stringify(Cart));
+    const content = localStorage.getItem("Cart");
+    this.setState({ content });
   }
 
-  
   //needs an update
   handleChange(event) {
     if (this.validateQty()) {
@@ -44,7 +40,15 @@ class Cart extends React.Component {
       console.log(this.state);
     }
   }
-
+  handleSubmit(evt) {
+    evt.preventDefault();
+    const storageCartItems = JSON.parse(localStorage.getItem("Cart"));
+    console.log('handleSubmit',storageCartItems)
+    this.props.checkOut(storageCartItems)
+    //localStorage.removeItem("Cart")
+    localStorage.clear()
+    //this.setState({content:[]})
+  }
   //needs an update
   validateQty() {
     let QtyError = "";
@@ -79,6 +83,7 @@ class Cart extends React.Component {
             </div>
 
             <div className="cart-container">
+            <form onSubmit={this.handleSubmit}> 
               {cartItems.map((cartItem) => (
                 <div key={cartItem.id} className="cart-item-container">
                   <img src={cartItem.imageURL} />
@@ -94,13 +99,19 @@ class Cart extends React.Component {
                     value={this.state.cartItemQty}
                   />
                   <button className="btn-cart-qty">-</button>
-                  <button className="btn-cart-delete" onClick={ () => this.handleClick(cartItem.id)}>Delete</button>
+                  <button
+                    className="btn-cart-delete"
+                    onClick={() => this.handleClick(cartItem.id)}
+                  >
+                    Delete
+                  </button>
                   <ul>{cartItem.price}</ul>
                   <ul>{cartItem.price * this.state.cartItemQty}</ul>
                 </div>
               ))}
+               <button className="btn-large" type='submit'>CHECKOUT</button>
+               </form>
             </div>
-            <button className="btn-large">CHECKOUT</button>
           </div>
         );
       }
@@ -120,6 +131,7 @@ class Cart extends React.Component {
           </div>
 
           <div className="cart-container">
+           
             {cartItems.map((cartItem) => (
               <div key={cartItem.id} className="cart-item-container">
                 <img src={cartItem.imageURL} />
@@ -140,6 +152,7 @@ class Cart extends React.Component {
                 <ul>{cartItem.price * this.state.cartItemQty}</ul>
               </div>
             ))}
+           
           </div>
           <button className="btn-large">CHECKOUT</button>
         </div>
@@ -160,6 +173,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getCart: (id) => dispatch(fetchCart(id)),
+    checkOut: (cartItems) => dispatch(checkoutAll(cartItems)),
   };
 };
 

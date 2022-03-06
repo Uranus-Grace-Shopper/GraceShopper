@@ -8,6 +8,7 @@ import SingleProduct from "./components/SingleProduct";
 import Cart from "./components/Cart";
 import MainPage from "./components/MainPage";
 import { me } from "./store";
+import isAdmin from "./components/isAdmin"
 
 /**
  * COMPONENT
@@ -31,6 +32,7 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
+            <Route path = "/users" component={isAdmin}/>
           </Switch>
         ) : (
           <Switch>
