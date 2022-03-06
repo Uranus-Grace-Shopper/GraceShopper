@@ -8,6 +8,7 @@ import SingleProduct from "./components/SingleProduct";
 import Cart from "./components/Cart";
 import MainPage from "./components/MainPage";
 import { me } from "./store";
+import ConfirmationPage from "./components/ConfirmationPage";
 
 /**
  * COMPONENT
@@ -27,6 +28,7 @@ class Routes extends Component {
           <Route exact path="/products" component={AllProducts} />
           <Route exact path="/products/:productId" component={SingleProduct} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/cart/checkout" component={ConfirmationPage} />
         </Switch>
         {isLoggedIn ? (
           <Switch>
