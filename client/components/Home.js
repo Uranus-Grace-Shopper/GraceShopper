@@ -6,7 +6,6 @@ import { connect } from "react-redux";
  */
 export const Home = (props) => {
   const { username } = props;
-  console.log("props >>>>", props);
   if (username) {
     return (
       <div>
