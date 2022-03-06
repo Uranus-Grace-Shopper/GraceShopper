@@ -60,7 +60,9 @@ class Cart extends React.Component {
     //need to fix key unique...
 
     //for guest user
-    if (!this.props.userInfo) {
+    console.log(this.props.userInfo);
+    const userInfo = this.props.userInfo;
+    if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
       let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
       if (storageCartItems) {
         // if (localStorage.length > 0) {
