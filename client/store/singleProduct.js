@@ -2,12 +2,15 @@ import axios from "axios";
 
 const GET_SINGLE_PRODUCT = "GET_SINGLE_PRODUCT";
 
+
 const getSingleProduct = (product) => {
   return {
     type: GET_SINGLE_PRODUCT,
     product,
   };
 };
+
+
 
 export const fetchSingleProduct = (id) => {
     return async (dispatch) => {
@@ -19,6 +22,8 @@ export const fetchSingleProduct = (id) => {
       }
     };
   };
+
+ 
 
   const initialState = {}
 

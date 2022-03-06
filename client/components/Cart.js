@@ -19,6 +19,7 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props, "THIS PROPS INSIDE COMPON DID MOUNT")
     this.props.getCart(this.props.userInfo);
   }
 
@@ -119,7 +120,8 @@ class Cart extends React.Component {
 
     //logged-in user:
     else {
-      const cart = this.props.cart[0];
+      const cart = this.props.cart;
+      console.log(cart, 'THIS IS CARTTTTTT')
       if (cart) {
         const cartItems = cart.products;
         return (

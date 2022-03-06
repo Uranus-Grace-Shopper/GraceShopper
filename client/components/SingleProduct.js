@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { fetchSingleProduct } from "../store/singleProduct";
+import { addingProductsToCart} from "../store/cart"
 
 import { me } from "../store";
 
@@ -15,7 +16,9 @@ class SingleProduct extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault();
     //guest user
-    // if (this.props.isLoggedIn) {
+      const userInfo = this.props.userInfo;
+      if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
+
     //if there is a cart
     let chosenWine = this.props.singleProduct;
     let chosenWineId = this.props.singleProduct.id;
@@ -29,6 +32,15 @@ class SingleProduct extends React.Component {
         localStorage.setItem("Cart", JSON.stringify(wineInCart));
       }
     }
+    
+
+  }
+
+  else {
+    this.props.addingProductsToCart(this.props.singleProduct.id);
+  }
+  //  
+ 
 
     // if (localStorage.length > 0) {
     //   // let cart = [];
@@ -81,13 +93,14 @@ const mapState = (state) => {
   // console.log("state", state.auth);
   return {
     singleProduct: state.singleProduct,
-    // isLoggedIn: !!state.auth.id,
+    userInfo: state.auth,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     fetchSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
+    addingProductsToCart: (id) => dispatch(addingProductsToCart(id))
     //loadInitialData:() => dispatch(me())
   };
 };
