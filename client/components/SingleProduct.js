@@ -15,23 +15,37 @@ class SingleProduct extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault();
     //guest user
-   // if (this.props.isLoggedIn) {
-      //if there is a cart
-      if (localStorage.length > 0) {
-        // let cart = [];
-        if (localStorage.getItem("Cart")) {
-          let content = JSON.parse(localStorage.getItem("Cart"));
-          content.push(this.props.singleProduct);
-          localStorage.setItem("Cart", JSON.stringify(content));
-        }
-        
-      } else {
-        const content = [];
-        localStorage.setItem("Cart", content);
-        content.push(this.props.singleProduct);
-        localStorage.setItem("Cart", JSON.stringify(content));
+    // if (this.props.isLoggedIn) {
+    //if there is a cart
+    let chosenWine = this.props.singleProduct;
+    let chosenWineId = this.props.singleProduct.id;
+
+    let wineInCart = JSON.parse(localStorage.getItem("Cart"));
+    if (!wineInCart) {
+      localStorage.setItem("Cart", JSON.stringify([chosenWine]));
+    } else {
+      if (!(chosenWineId in wineInCart)) {
+        wineInCart.push(chosenWine);
+        localStorage.setItem("Cart", JSON.stringify(wineInCart));
       }
-    
+    }
+
+    // if (localStorage.length > 0) {
+    //   // let cart = [];
+    //   if (localStorage.getItem("Cart")) {
+    //     let content = JSON.parse(localStorage.getItem("Cart"));
+    //     console.log("content>>>>  ", content);
+    //     content.push(this.props.singleProduct);
+    //     localStorage.setItem("Cart", JSON.stringify(content));
+    //   }
+    // } else {
+    //   const content = [];
+    //   localStorage.setItem("Cart", content);
+    //   content.push(this.props.singleProduct);
+    //   console.log("content>>>>  ", content);
+
+    //   localStorage.setItem("Cart", JSON.stringify(content));
+    // }
   }
 
   componentDidMount() {
@@ -40,6 +54,8 @@ class SingleProduct extends React.Component {
     this.props.fetchSingleProduct(productId);
   }
   render() {
+    let content = JSON.parse(localStorage.getItem("Cart"));
+    console.log("content>>>>  ", content);
     const product = this.props.singleProduct;
     return (
       <div id="single-product">
@@ -50,7 +66,9 @@ class SingleProduct extends React.Component {
             <ul>Description: {product.description}</ul>
             <img src={product.imageURL} />
             <div>
-              <button>Add to cart</button>
+              <button className="btn-large" type="submit">
+                ADD TO CART
+              </button>
             </div>
           </div>
         </form>
@@ -60,10 +78,10 @@ class SingleProduct extends React.Component {
 }
 
 const mapState = (state) => {
-  console.log("state", state.auth);
+  // console.log("state", state.auth);
   return {
     singleProduct: state.singleProduct,
-   // isLoggedIn: !!state.auth.id,
+    // isLoggedIn: !!state.auth.id,
   };
 };
 
@@ -71,7 +89,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
     //loadInitialData:() => dispatch(me())
-}
+  };
 };
 
-export default connect(mapState, mapDispatch)(SingleProduct)
+export default connect(mapState, mapDispatch)(SingleProduct);
