@@ -40,6 +40,7 @@ class Cart extends React.Component {
 
   handleClickCheckout() {
     localStorage.removeItem("Cart");
+   
     this.setState({ content: [] });
   }
 

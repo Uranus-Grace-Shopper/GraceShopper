@@ -11,6 +11,7 @@ const addNewProductsToCart = (product) => {
   };
 };
 
+
 export const addingProductsToCart = (id) => {
   return async (dispatch) => {
     try {
@@ -21,6 +22,7 @@ export const addingProductsToCart = (id) => {
     }
   };
 };
+
 
 const initialState = [];
 
