@@ -1,47 +1,34 @@
 import React from "react";
-
 import { connect } from "react-redux";
-
 import { fetchSingleProduct } from "../store/singleProduct";
-import { addingProductsToCart} from "../store/cart"
-
-import { me } from "../store";
+import { addingProductsToCart } from "../store/cartItems";
 
 class SingleProduct extends React.Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleSubmit(evt) {
     evt.preventDefault();
     //guest user
-      const userInfo = this.props.userInfo;
-      if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
-
-    //if there is a cart
-    let chosenWine = this.props.singleProduct;
-    let chosenWineId = this.props.singleProduct.id;
-
-    let wineInCart = JSON.parse(localStorage.getItem("Cart"));
-    if (!wineInCart) {
-      localStorage.setItem("Cart", JSON.stringify([chosenWine]));
-    } else {
-      if (!(chosenWineId in wineInCart)) {
-        wineInCart.push(chosenWine);
-        localStorage.setItem("Cart", JSON.stringify(wineInCart));
+    const userInfo = this.props.userInfo;
+    if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
+      //if there is a cart
+      let chosenWine = this.props.singleProduct;
+      let chosenWineId = this.props.singleProduct.id;
+      let wineInCart = JSON.parse(localStorage.getItem("Cart"));
+      if (!wineInCart) {
+        localStorage.setItem("Cart", JSON.stringify([chosenWine]));
+      } else {
+        if (!(chosenWineId in wineInCart)) {
+          wineInCart.push(chosenWine);
+          localStorage.setItem("Cart", JSON.stringify(wineInCart));
+        }
       }
+    } else {
+      this.props.addingProductsToCart(this.props.singleProduct.id);
     }
-    
-
-  }
-
-  else {
-    this.props.addingProductsToCart(this.props.singleProduct.id);
-  }
-  //  
- 
-
+    //
     // if (localStorage.length > 0) {
     //   // let cart = [];
     //   if (localStorage.getItem("Cart")) {
@@ -100,8 +87,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
-    addingProductsToCart: (id) => dispatch(addingProductsToCart(id))
-    //loadInitialData:() => dispatch(me())
+    addingProductsToCart: (id) => dispatch(addingProductsToCart(id)),
   };
 };
 
