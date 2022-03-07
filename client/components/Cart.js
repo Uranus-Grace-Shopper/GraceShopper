@@ -19,8 +19,10 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props, "THIS PROPS INSIDE COMPON DID MOUNT");
-    this.props.getCart(this.props.userInfo);
+    console.log(this.props.userInfo, "THIS PROPS INSIDE COMPON DID MOUNT");
+    //this.props.userInfor returns an object, but this.props.getCart(id) asks for id as param
+    // this.props.getCart(this.props.userInfo);
+    this.props.getCart()
   }
   handleClick(id) {
     let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
@@ -40,7 +42,6 @@ class Cart extends React.Component {
 
   handleClickCheckout() {
     localStorage.removeItem("Cart");
-   
     this.setState({ content: [] });
   }
 
@@ -102,6 +103,7 @@ class Cart extends React.Component {
                 className="btn-cart-delete"
                 onClick={() => this.handleClick(cartItem.id)}
               >
+                {/* need a if/else statement to delete items for loggedin user */}
                 Delete
               </button>
               <ul>{cartItem.price}</ul>
@@ -112,7 +114,10 @@ class Cart extends React.Component {
         <Link to={`/cart/checkout`}>
           <button
             className="btn-large"
-            onClick={() => this.handleClickCheckout()}
+            onClick={() => {
+              
+              this.handleClickCheckout()
+            }}
           >
             CHECKOUT
           </button>
@@ -132,7 +137,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getCart: (id) => dispatch(fetchCart(id)),
+   //getCart: (id) => dispatch(fetchCart(id)),
+    getCart: () => dispatch(fetchCart()),
   };
 };
 

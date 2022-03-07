@@ -23,10 +23,22 @@ const checkOut = (cartItmes) => {
 
 
 //fetch individual cart thunk
-export const fetchCart = (userInfo) => {
+// export const fetchCart = (userInfo) => {
+//   return async (dispatch) => {
+//     try {
+//       const { data } = await axios.get(`/api/cart/`, userInfo);
+//       // console.log("data >>>>>>>>", data);
+//       dispatch(setCart(data));
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
+// };
+
+export const fetchCart = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`/api/cart/`, userInfo);
+      const { data } = await axios.get(`/api/cart/`);
       // console.log("data >>>>>>>>", data);
       dispatch(setCart(data));
     } catch (err) {

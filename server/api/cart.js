@@ -5,28 +5,41 @@ const {
 
 module.exports = router;
 
-router.post("/", async (req, res, next) => {
+// router.post("/", async (req, res, next) => {
+//   try {
+//     const userId = req.body.id;
+
+//     //guest cart
+//     // if(!userId) {
+
+//     // }
+//     if (userId) {
+//       const cart = await Cart.findAll({
+//         where: {
+//           userId: userId,
+//         },
+//         include: Product,
+//       });
+//       res.send(cart);
+//     }
+//   } catch (e) {
+//     next(e);
+//   }
+// });
+//need requirToken to get userId
+router.get("/", async (req, res, next) => {
   try {
-    const userId = req.body.id;
-
-    //guest cart
-    // if(!userId) {
-
-    // }
-    if (userId) {
-      const cart = await Cart.findAll({
+      const cart = await Cart.findOne({
         where: {
-          userId: userId,
+          userId: 11,
         },
         include: Product,
       });
       res.send(cart);
-    }
   } catch (e) {
     next(e);
   }
 });
-
 //logged in user
 
 router.post("/add/:productId", async (req, res, next) => {
