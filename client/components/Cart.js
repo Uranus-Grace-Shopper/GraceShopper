@@ -120,10 +120,10 @@ class Cart extends React.Component {
 
     //logged-in user:
     else {
-      const cart = this.props.cart;
-      console.log(cart, 'THIS IS CARTTTTTT')
-      if (cart) {
-        const cartItems = cart.products;
+      const cartItems = this.props.cart;
+      console.log(cartItems, 'THIS IS CARTTTTTT')
+      if (cartItems) {
+        //const cartItems = cart.products;
         return (
           <div>
             <h1 className="title"> Your Cart</h1>
