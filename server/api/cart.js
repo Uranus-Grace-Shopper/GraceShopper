@@ -59,7 +59,7 @@ router.put("/checkout", requireToken, async (req, res, next) => {
       userId: req.user.dataValues.id,
       isPurchased: false,
     });
-    console.log('req.body in checkout+++++',req.body)
+    //console.log('req.body in checkout+++++',req.body)
     res.status(201);
   } catch (e) {
     next(e);
