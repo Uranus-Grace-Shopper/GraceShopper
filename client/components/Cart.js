@@ -19,9 +19,6 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    //console.log(this.props.userInfo, "THIS PROPS INSIDE COMPON DID MOUNT");
-    //this.props.userInfor returns an object, but this.props.getCart(id) asks for id as param
-    // this.props.getCart(this.props.userInfo);
     this.props.getCart();
     console.log('this.props.cart', this.props.cart);
   }
@@ -71,8 +68,8 @@ class Cart extends React.Component {
 
   render() {
     //need to fix key unique...
-
     const userInfo = this.props.userInfo;
+    
     let cartItems = this.state.content;
     console.log('cartItems', cartItems);
     Object.keys(userInfo).length === 0 && userInfo.constructor === Object
@@ -157,7 +154,6 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    //getCart: (id) => dispatch(fetchCart(id)),
     getCart: () => dispatch(fetchCart()),
     checkout: (cartItems) => dispatch(checkoutAll(cartItems)),
   };
@@ -165,13 +161,3 @@ const mapDispatch = (dispatch) => {
 
 export default connect(mapState, mapDispatch)(Cart);
 
-// if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
-//   let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
-//   if (storageCartItems) {
-//     // if (localStorage.length > 0) {
-//      let cartItems = storageCartItems;
-//   }
-//   }  else {
-//     let cartItems = this.props.cartItems;
-//     console.log(cartItems, "THIS IS CARTTTTTT");
-//   }

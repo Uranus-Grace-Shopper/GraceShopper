@@ -40,24 +40,6 @@ class SingleProduct extends React.Component {
     } else {
       this.props.addingProductsToCart(this.props.singleProduct.id);
     }
-
-    //
-    // if (localStorage.length > 0) {
-    //   // let cart = [];
-    //   if (localStorage.getItem("Cart")) {
-    //     let content = JSON.parse(localStorage.getItem("Cart"));
-    //     console.log("content>>>>  ", content);
-    //     content.push(this.props.singleProduct);
-    //     localStorage.setItem("Cart", JSON.stringify(content));
-    //   }
-    // } else {
-    //   const content = [];
-    //   localStorage.setItem("Cart", content);
-    //   content.push(this.props.singleProduct);
-    //   console.log("content>>>>  ", content);
-
-    //   localStorage.setItem("Cart", JSON.stringify(content));
-    // }
   }
 
   componentDidMount() {
