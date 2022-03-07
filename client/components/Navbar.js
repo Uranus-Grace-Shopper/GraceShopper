@@ -5,7 +5,7 @@ import { logout } from "../store";
 import { Home } from "./Home";
 
 const Navbar = ({ handleClick, isLoggedIn, username, isAdmin }) => (
-  <div>
+  <div id="navbar">
     <nav>
       <Link className="navlink" to="/">
         <img src="/logo.png" className="logo" />

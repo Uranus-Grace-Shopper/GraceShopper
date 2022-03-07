@@ -59,6 +59,15 @@ class Cart extends React.Component {
     }
     return true;
   }
+
+  createDropDown(stockQty) {
+    let elements = [];
+    for (let i = 1; i <= stockQty; i++) {
+      elements.push(<option key={i}>{i}</option>);
+    }
+    return elements;
+  }
+
   render() {
     //need to fix key unique...
     console.log(this.props.userInfo);
@@ -131,7 +140,7 @@ class Cart extends React.Component {
       // >>>>>>> origin/AddButtonForLoggin
     }
     return (
-      <div>
+      <div className="div-cart">
         <h1 className="title"> Your Cart</h1>
         <div className="cart-headings">
           <ul>Product</ul>
@@ -148,13 +157,15 @@ class Cart extends React.Component {
                   {cartItem.name} {cartItem.year}
                 </h4>
               </Link>
-              <button className="btn-cart-qty">+</button>
-              <input
+              <select
+                className="qty-dropdown"
                 name="cartItemQty"
                 onChange={this.handleChange}
                 value={this.state.cartItemQty}
-              />
-              <button className="btn-cart-qty">-</button>
+              >
+                {this.createDropDown(cartItem.quantity)}
+              </select>
+
               <button
                 className="btn-cart-delete"
                 onClick={() => this.handleClick(cartItem.id)}
@@ -167,6 +178,12 @@ class Cart extends React.Component {
             </div>
           ))}
         </div>
+
+        <hr />
+        <div className="cart-total-price">
+          <p>CART TOTAL: </p>
+        </div>
+
         <Link to={`/cart/checkout`}>
           <button
             className="btn-large"

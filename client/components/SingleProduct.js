@@ -70,18 +70,33 @@ class SingleProduct extends React.Component {
     console.log("content>>>>  ", content);
     const product = this.props.singleProduct;
     return (
-      <div id="single-product">
+      <div className="single-product">
         <form onSubmit={this.handleSubmit}>
-          <div id="product-details">
-            <h4>Name: {product.name}</h4>
-            <ul>Vintage: {product.year}</ul>
-            <ul>Description: {product.description}</ul>
-            <img src={product.imageURL} />
-            <div>
-              <button className="btn-large" type="submit">
-                ADD TO CART
-              </button>
-            </div>
+          <div className="product-details">
+            <img className="img-wine" src={product.imageURL} />
+            <table>
+              <tbody>
+                <tr>
+                  <td>Name:</td>
+                  <td>{product.name}</td>
+                </tr>
+                <tr>
+                  <td>Vintage:</td>
+                  <td>{product.year}</td>
+                </tr>
+                <tr>
+                  <td>Price:</td>
+                  <td>${product.price}</td>
+                </tr>
+                <tr>
+                  <td>Description:</td>
+                  <td>{product.description}</td>
+                </tr>
+              </tbody>
+            </table>
+            <button className="btn-large" type="submit">
+              ADD TO CART
+            </button>
           </div>
         </form>
       </div>
