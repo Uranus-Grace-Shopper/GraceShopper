@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCart } from "../store/cart";
+import { fetchCart,checkoutAll } from "../store/cart";
 import { Link } from "react-router-dom";
 import history from "../history";
 
@@ -115,8 +115,8 @@ class Cart extends React.Component {
           <button
             className="btn-large"
             onClick={() => {
-              
-              this.handleClickCheckout()
+              Object.keys(userInfo).length === 0 ?
+              this.handleClickCheckout() : this.props.checkout({...this.state})
             }}
           >
             CHECKOUT
@@ -139,6 +139,7 @@ const mapDispatch = (dispatch) => {
   return {
    //getCart: (id) => dispatch(fetchCart(id)),
     getCart: () => dispatch(fetchCart()),
+    checkout: (cartItems)=>dispatch(checkoutAll(cartItems))
   };
 };
 
