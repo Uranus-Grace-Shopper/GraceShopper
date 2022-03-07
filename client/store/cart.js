@@ -94,8 +94,10 @@ const initialState = [];
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case SET_CART:
+        console.log('cart in redux checkout=====',state)
       return action.cartItems;
       case CHECK_OUT:
+     
         return action.cart
        // return state.filter((product)=>product.id !==action.product.id)
     default:

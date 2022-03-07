@@ -23,6 +23,7 @@ class Cart extends React.Component {
     //this.props.userInfor returns an object, but this.props.getCart(id) asks for id as param
     // this.props.getCart(this.props.userInfo);
     this.props.getCart();
+    console.log('this.props.cart', this.props.cart);
   }
   handleClick(id) {
     let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
@@ -70,13 +71,14 @@ class Cart extends React.Component {
 
   render() {
     //need to fix key unique...
-    //console.log(this.props.userInfo);
+
     const userInfo = this.props.userInfo;
     let cartItems = this.state.content;
+    console.log('cartItems', cartItems);
     Object.keys(userInfo).length === 0 && userInfo.constructor === Object
       ? (cartItems = JSON.parse(localStorage.getItem("Cart")))
       : (cartItems = this.props.cart);
-    if (!cartItems) {
+    if (!cartItems || cartItems.length ===0) {
       return (
         <div>
           <p>no items in the cart</p>
@@ -134,7 +136,7 @@ class Cart extends React.Component {
             onClick={() => {
               Object.keys(userInfo).length === 0
                 ? this.handleClickCheckout()
-                : this.props.checkout({ ...this.state });
+                : this.props.checkout(this.props.cart);
             }}
           >
             CHECKOUT
