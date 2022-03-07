@@ -19,7 +19,7 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.userInfo, "THIS PROPS INSIDE COMPON DID MOUNT");
+    //console.log(this.props.userInfo, "THIS PROPS INSIDE COMPON DID MOUNT");
     //this.props.userInfor returns an object, but this.props.getCart(id) asks for id as param
     // this.props.getCart(this.props.userInfo);
     this.props.getCart();
@@ -70,74 +70,18 @@ class Cart extends React.Component {
 
   render() {
     //need to fix key unique...
-    console.log(this.props.userInfo);
+    //console.log(this.props.userInfo);
     const userInfo = this.props.userInfo;
-    // <<<<<<< HEAD
-    //     if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
-    //       let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
-    //       if (storageCartItems) {
-    //         // if (localStorage.length > 0) {
-    //         const cartItems = storageCartItems;
-    //         return (
-    //           <div>
-    //             <h1 className="title"> Your Cart</h1>
-    //             <div className="cart-headings">
-    //               <ul>Product</ul>
-    //               <ul>Quantity</ul>
-    //               <ul>Unit Price</ul>
-    //               <ul>Total Price</ul>
-    //             </div>
-
-    //             <div className="cart-container">
-    //               {cartItems.map((cartItem) => (
-    //                 <div key={cartItem.id} className="cart-item-container">
-    //                   <img src={cartItem.imageURL} />
-    //                   <Link to={`/products/${cartItem.id}`}>
-    //                     <h4>
-    //                       {cartItem.name} {cartItem.year}
-    //                     </h4>
-    //                   </Link>
-    //                   <button className="btn-cart-qty">+</button>
-    //                   <input
-    //                     name="cartItemQty"
-    //                     onChange={this.handleChange}
-    //                     value={this.state.cartItemQty}
-    //                   />
-    //                   <button className="btn-cart-qty">-</button>
-    //                   <button
-    //                     className="btn-cart-delete"
-    //                     onClick={() => this.handleClick(cartItem.id)}
-    //                   >
-    //                     Delete
-    //                   </button>
-    //                   <ul>{cartItem.price}</ul>
-    //                   <ul>{cartItem.price * this.state.cartItemQty}</ul>
-    //                 </div>
-    //               ))}
-    //             </div>
-    //             <Link to={`/cart/checkout`}>
-    //               <button
-    //                 className="btn-large"
-    //                 onClick={() => this.handleClickCheckout()}
-    //               >
-    //                 CHECKOUT
-    //               </button>
-    //             </Link>
-    //           </div>
-    //         );
-    //       }
-    // =======
     let cartItems = this.state.content;
     Object.keys(userInfo).length === 0 && userInfo.constructor === Object
       ? (cartItems = JSON.parse(localStorage.getItem("Cart")))
-      : (cartItems = this.props.cartItems);
+      : (cartItems = this.props.cart);
     if (!cartItems) {
       return (
         <div>
           <p>no items in the cart</p>
         </div>
       );
-      // >>>>>>> origin/AddButtonForLoggin
     }
     return (
       <div className="div-cart">
@@ -202,11 +146,10 @@ class Cart extends React.Component {
 }
 
 const mapState = (state) => {
-  console.log(state, "THESE ARE THE STATES IN CART CP");
+ console.log(state, "THESE ARE THE STATES IN CART CP");
   return {
     cart: state.cart,
     userInfo: state.auth,
-    cartItems: state.cartItems,
   };
 };
 

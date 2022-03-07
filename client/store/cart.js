@@ -3,22 +3,22 @@ import axios from "axios";
 //action type
 const SET_CART = "SET_CART";
 const CHECK_OUT = "CHECKOUT"
-const EMPTY_CART = "EMPTY_CART"
+//const EMPTY_CART = "EMPTY_CART"
 
-
+const TOKEN = 'token'
 //action creator- fetch all products
-const setCart = (cart) => {
+const setCart = (cartItems) => {
   return {
     type: SET_CART,
-    cart,
+    cartItems,
   };
 };
 
 // action creator - checkout for loggedin user
-const checkOut = (cartItems) => {
+const checkOut = (cart) => {
   return {
     type: CHECK_OUT,
-    cartItems,
+    cart,
   };
 };
 
@@ -45,13 +45,14 @@ const checkOut = (cartItems) => {
 export const fetchCart = () => {
   return async (dispatch) => {
     try {
-      const token = window.localStorage.getItem("token")
+      const token = window.localStorage.getItem(TOKEN)
       const { data } = await axios.get(`/api/cart/`, {
         headers: {
           authorization: token,
         },
       });
-      console.log("data >>>>>>>>", data.products);
+      //this returns an array of products in the cart
+      //console.log("data >>>>>>>>", data.products);
       dispatch(setCart(data.products));
     } catch (err) {
       console.log(err);
@@ -60,9 +61,15 @@ export const fetchCart = () => {
 };
 
 export const checkoutAll = (cart) => {
+  const token = window.localStorage.getItem('token')
+  //console.log("token========",token)
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(`/api/cart/checkout`,cart);
+      const { data } = await axios.put(`/api/cart/checkout`,cart,{
+        headers: {
+          authorization: token
+        }
+      });
       dispatch(checkOut(data));
     } catch (err) {
       console.log(err);
@@ -87,9 +94,9 @@ const initialState = [];
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case SET_CART:
-      return action.cart;
+      return action.cartItems;
       case CHECK_OUT:
-        return action.cartItems
+        return action.cart
        // return state.filter((product)=>product.id !==action.product.id)
     default:
       return state;

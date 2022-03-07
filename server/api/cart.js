@@ -29,11 +29,13 @@ module.exports = router;
 //   }
 // });
 //need requirToken to get userId
+
 router.get("/", requireToken, async (req, res, next) => {
   try {
       const cart = await Cart.findOne({
         where: {
           userId: req.user.dataValues.id,
+          isPurchased: false
         },
         include: Product,
       });
@@ -53,12 +55,9 @@ router.put("/checkout", requireToken, async (req, res, next) => {
       isPurchased:false
     }
     });
-    console.log('cart+++++',cart)
-    //not working in postico
-    //maybe use req.body to update cart
-    cart.isPurchased=true;
-    //console.log('cart+++++',cart.isPurchased)
-    res.send();
+    await cart.update({isPurchased:true})
+    //console.log('cart+++++',cart)
+    res.status(201).send(cart);
       } catch (e) {
         next(e);
       }
