@@ -202,7 +202,7 @@ class Cart extends React.Component {
 }
 
 const mapState = (state) => {
-  console.log(state);
+  console.log(state, "THESE ARE THE STATES IN CART CP");
   return {
     cart: state.cart,
     userInfo: state.auth,

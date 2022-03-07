@@ -34,13 +34,13 @@ router.get("/:productId", async (req, res, next) => {
 });
 
 // put requireToken before async when it works
-router.post("/:productId", requireToken, async (req, res, next) => {
+router.post("/:productId", async (req, res, next) => {
   try {
-    console.log(req.user.dataValues.id, "token is hereeeee")
+    // console.log(req.user.dataValues.id, "token is hereeeee")
     const singleProduct = await Product.findByPk(req.params.productId);
     const cart = await Cart.findOne({
       where: {
-        userId: req.user.dataValues.id, 
+        userId: 1, 
         isPurchased: false
       }
     })

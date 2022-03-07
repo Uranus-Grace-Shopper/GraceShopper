@@ -1,7 +1,7 @@
 import axios from "axios";
 
 //action type
-const ADD_NEW_PRODUCTS_TO_CART = "ADD_NEW_PRODUCTS_TO_CART"
+const ADD_NEW_PRODUCTS_TO_CART = "ADD_NEW_PRODUCTS_TO_CART";
 
 // action creator - get cart with new products
 const addNewProductsToCart = (cartItem) => {
@@ -16,7 +16,6 @@ export const addingProductsToCart = (id) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem("token");
-      console.log(token)
       const { data } = await axios.post(`/api/products/${id}`, {
         headers: {
           authorization: token,

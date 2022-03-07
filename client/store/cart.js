@@ -15,10 +15,10 @@ const setCart = (cart) => {
 };
 
 // action creator - checkout for loggedin user
-const checkOut = (cartItmes) => {
+const checkOut = (cartItems) => {
   return {
     type: CHECK_OUT,
-    cartItmes,
+    cartItems,
   };
 };
 
@@ -51,8 +51,8 @@ export const fetchCart = () => {
           authorization: token,
         },
       });
-      // console.log("data >>>>>>>>", data);
-      dispatch(setCart(data));
+      console.log("data >>>>>>>>", data.products);
+      dispatch(setCart(data.products));
     } catch (err) {
       console.log(err);
     }
@@ -89,7 +89,7 @@ export default function cartReducer(state = initialState, action) {
     case SET_CART:
       return action.cart;
       case CHECK_OUT:
-        return action.cartItmes
+        return action.cartItems
        // return state.filter((product)=>product.id !==action.product.id)
     default:
       return state;
