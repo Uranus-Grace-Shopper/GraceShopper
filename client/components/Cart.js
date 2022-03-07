@@ -22,7 +22,6 @@ class Cart extends React.Component {
     console.log(this.props, "THIS PROPS INSIDE COMPON DID MOUNT");
     this.props.getCart(this.props.userInfo);
   }
-
   handleClick(id) {
     let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
     let Cart = storageCartItems.filter((cartItem) => cartItem.id !== id);
@@ -30,14 +29,12 @@ class Cart extends React.Component {
     const content = localStorage.getItem("Cart");
     this.setState({ content });
   }
-
-  //needs an update
+  // //needs an update
   handleChange(event) {
     if (this.validateQty()) {
       this.setState({
         [event.target.name]: event.target.value,
       });
-      // console.log(this.state);
     }
   }
 
@@ -61,128 +58,68 @@ class Cart extends React.Component {
     return true;
   }
   render() {
-    //console.log('localstorage',localStorage.getItem("Cart"))
     //need to fix key unique...
-    //for guest user
     console.log(this.props.userInfo);
     const userInfo = this.props.userInfo;
-    let cartItems = this.state.content
-    Object.keys(userInfo).length === 0 && userInfo.constructor === Object ?
-    cartItems = JSON.parse(localStorage.getItem("Cart")) : cartItems = this.props.cartItems
-    if(cartItems.length===0){
+    let cartItems = this.state.content;
+    Object.keys(userInfo).length === 0 && userInfo.constructor === Object
+      ? (cartItems = JSON.parse(localStorage.getItem("Cart")))
+      : (cartItems = this.props.cartItems);
+    if (!cartItems) {
       return (
         <div>
           <p>no items in the cart</p>
         </div>
-      )
+      );
     }
-    // if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
-    //   let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
-    //   if (storageCartItems) {
-    //     // if (localStorage.length > 0) {
-    //      let cartItems = storageCartItems;
-    //   } 
-    //   }  else {
-    //     let cartItems = this.props.cartItems;
-    //     console.log(cartItems, "THIS IS CARTTTTTT");
-    //   }
-        return (
-          <div>
-            <h1 className="title"> Your Cart</h1>
-            <div className="cart-headings">
-              <ul>Product</ul>
-              <ul>Quantity</ul>
-              <ul>Unit Price</ul>
-              <ul>Total Price</ul>
-            </div>
-
-            <div className="cart-container">
-              {cartItems.map((cartItem) => (
-                <div key={cartItem.id} className="cart-item-container">
-                  <img src={cartItem.imageURL} />
-                  <Link to={`/products/${cartItem.id}`}>
-                    <h4>
-                      {cartItem.name} {cartItem.year}
-                    </h4>
-                  </Link>
-                  <button className="btn-cart-qty">+</button>
-                  <input
-                    name="cartItemQty"
-                    onChange={this.handleChange}
-                    value={this.state.cartItemQty}
-                  />
-                  <button className="btn-cart-qty">-</button>
-                  <button
-                    className="btn-cart-delete"
-                    onClick={() => this.handleClick(cartItem.id)}
-                  >
-                    Delete
-                  </button>
-                  <ul>{cartItem.price}</ul>
-                  <ul>{cartItem.price * this.state.cartItemQty}</ul>
-                </div>
-              ))}
-            </div>
-            <Link to={`/cart/checkout`}>
+    return (
+      <div>
+        <h1 className="title"> Your Cart</h1>
+        <div className="cart-headings">
+          <ul>Product</ul>
+          <ul>Quantity</ul>
+          <ul>Unit Price</ul>
+          <ul>Total Price</ul>
+        </div>
+        <div className="cart-container">
+          {cartItems.map((cartItem) => (
+            <div key={cartItem.id} className="cart-item-container">
+              <img src={cartItem.imageURL} />
+              <Link to={`/products/${cartItem.id}`}>
+                <h4>
+                  {cartItem.name} {cartItem.year}
+                </h4>
+              </Link>
+              <button className="btn-cart-qty">+</button>
+              <input
+                name="cartItemQty"
+                onChange={this.handleChange}
+                value={this.state.cartItemQty}
+              />
+              <button className="btn-cart-qty">-</button>
               <button
-                className="btn-large"
-                onClick={() => this.handleClickCheckout()}
+                className="btn-cart-delete"
+                onClick={() => this.handleClick(cartItem.id)}
               >
-                CHECKOUT
+                Delete
               </button>
-            </Link>
-          </div>
-        );
-      }
-    }
-
-//     //logged-in user:
-//     else {
-//       const cartItems = this.props.cartItems;
-//       console.log(cartItems, "THIS IS CARTTTTTT");
-//       if (cartItems) {
-//         //const cartItems = cart.products;
-//         return (
-//           <div>
-//             <h1 className="title"> Your Cart</h1>
-//             <div className="cart-headings">
-//               <ul>Product</ul>
-//               <ul>Quantity</ul>
-//               <ul>Unit Price</ul>
-//               <ul>Total Price</ul>
-//             </div>
-
-//             <div className="cart-container">
-//               {cartItems.map((cartItem) => (
-//                 <div key={cartItem.id} className="cart-item-container">
-//                   <img src={cartItem.imageURL} />
-//                   <Link to={`/products/${cartItem.id}`}>
-//                     <h4>
-//                       {cartItem.name} {cartItem.year}
-//                     </h4>
-//                   </Link>
-//                   <button className="btn-cart-qty">+</button>
-//                   <input
-//                     name="cartItemQty"
-//                     onChange={this.handleChange}
-//                     value={this.state.cartItemQty}
-//                   />
-//                   <button className="btn-cart-qty">-</button>
-//                   <button className="btn-cart-delete">Delete</button>
-//                   <ul>{cartItem.price}</ul>
-//                   <ul>{cartItem.price * this.state.cartItemQty}</ul>
-//                 </div>
-//               ))}
-//             </div>
-//             <button className="btn-large">CHECKOUT</button>
-//           </div>
-//         );
-//       } else {
-//         return <div>nothing in the cart</div>;
-//       }
-//     }
-//   }
-// }
+              <ul>{cartItem.price}</ul>
+              <ul>{cartItem.price * this.state.cartItemQty}</ul>
+            </div>
+          ))}
+        </div>
+        <Link to={`/cart/checkout`}>
+          <button
+            className="btn-large"
+            onClick={() => this.handleClickCheckout()}
+          >
+            CHECKOUT
+          </button>
+        </Link>
+      </div>
+    );
+  }
+}
 
 const mapState = (state) => {
   return {
@@ -199,3 +136,14 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(Cart);
+
+// if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
+//   let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
+//   if (storageCartItems) {
+//     // if (localStorage.length > 0) {
+//      let cartItems = storageCartItems;
+//   }
+//   }  else {
+//     let cartItems = this.props.cartItems;
+//     console.log(cartItems, "THIS IS CARTTTTTT");
+//   }
