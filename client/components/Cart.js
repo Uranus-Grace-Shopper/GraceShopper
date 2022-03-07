@@ -42,7 +42,7 @@ class Cart extends React.Component {
 
   handleClickCheckout() {
     localStorage.removeItem("Cart");
-    this.setState({content: []})
+    this.setState({ content: [] });
   }
 
   //needs an update
@@ -110,7 +110,12 @@ class Cart extends React.Component {
               ))}
             </div>
             <Link to={`/cart/checkout`}>
-            <button className="btn-large" onClick={()=> this.handleClickCheckout()}>CHECKOUT</button>
+              <button
+                className="btn-large"
+                onClick={() => this.handleClickCheckout()}
+              >
+                CHECKOUT
+              </button>
             </Link>
           </div>
         );
@@ -165,6 +170,7 @@ class Cart extends React.Component {
 }
 
 const mapState = (state) => {
+  console.log(state);
   return {
     cart: state.cart,
     userInfo: state.auth,
