@@ -5,6 +5,36 @@ import { Link } from "react-router-dom";
 import Winery from "./Winery";
 
 class AllProducts extends React.Component {
+  constructor() {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault();
+    const products = this.props.allProducts;
+    for (let i = 0; i < products.length; i++) {
+      console.log(evt.target)
+      let chosenWine = product[i];
+      console.log("chosen wine >>>>>>>>", chosenWine);
+      let chosenWineId = products[i].id;
+      console.log("wine id >>>>>>", chosenWineId);
+
+      let wineInCart = JSON.parse(localStorage.getItem("Cart"));
+      if (chosenWine) {
+        if (!wineInCart) {
+          localStorage.setItem("Cart", JSON.stringify(chosenWine));
+          console.log(products[i]);
+        } else {
+          if (!(chosenWineId in wineInCart)) {
+            wineInCart.push(chosenWine);
+            localStorage.setItem("Cart", JSON.stringify(wineInCart));
+          }
+        }
+      }
+    }
+  }
+
   componentDidMount() {
     this.props.getProducts();
   }
@@ -26,7 +56,11 @@ class AllProducts extends React.Component {
                   </p>
                 </Link>
               </div>
-              <button className="btn-large">ADD TO CART</button>
+              <form onSubmit={()=>this.handleSubmit(product.id)}>
+                <button className="btn-large" type="submit">
+                  ADD TO CART
+                </button>
+              </form>
             </div>
           ))}
         </div>
