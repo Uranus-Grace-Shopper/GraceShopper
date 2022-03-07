@@ -7,6 +7,7 @@ import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
 import Cart from "./components/Cart";
 import MainPage from "./components/MainPage";
+import AdminPortal from "./components/AdminPortal";
 import { me } from "./store";
 import ConfirmationPage from "./components/ConfirmationPage";
 
@@ -29,6 +30,7 @@ class Routes extends Component {
           <Route exact path="/products/:productId" component={SingleProduct} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/cart/checkout" component={ConfirmationPage} />
+          <Route exact path="/admin" component={AdminPortal} />
         </Switch>
         {isLoggedIn ? (
           <Switch>
@@ -36,7 +38,7 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route exact path="/" exact component={Login} />
+            {/* <Route exact path="/" exact component={Login} /> */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
           </Switch>

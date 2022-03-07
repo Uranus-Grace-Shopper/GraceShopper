@@ -26,7 +26,7 @@ class AllProducts extends React.Component {
                   </p>
                 </Link>
               </div>
-              <button className="btn-large">ADD TO CART</button>
+              <button onClick = {()=>console.log(product.id)} className="btn-large">ADD TO CART</button>
             </div>
           ))}
         </div>
