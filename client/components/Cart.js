@@ -20,8 +20,6 @@ class Cart extends React.Component {
 
   componentDidMount() {
     console.log(this.props.userInfo, "THIS PROPS INSIDE COMPON DID MOUNT");
-    //this.props.userInfor returns an object, but this.props.getCart(id) asks for id as param
-    // this.props.getCart(this.props.userInfo);
     this.props.getCart();
   }
   handleClick(id) {
@@ -69,64 +67,10 @@ class Cart extends React.Component {
   }
 
   render() {
-    //need to fix key unique...
+    
     console.log(this.props.userInfo);
     const userInfo = this.props.userInfo;
-    // <<<<<<< HEAD
-    //     if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
-    //       let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
-    //       if (storageCartItems) {
-    //         // if (localStorage.length > 0) {
-    //         const cartItems = storageCartItems;
-    //         return (
-    //           <div>
-    //             <h1 className="title"> Your Cart</h1>
-    //             <div className="cart-headings">
-    //               <ul>Product</ul>
-    //               <ul>Quantity</ul>
-    //               <ul>Unit Price</ul>
-    //               <ul>Total Price</ul>
-    //             </div>
-
-    //             <div className="cart-container">
-    //               {cartItems.map((cartItem) => (
-    //                 <div key={cartItem.id} className="cart-item-container">
-    //                   <img src={cartItem.imageURL} />
-    //                   <Link to={`/products/${cartItem.id}`}>
-    //                     <h4>
-    //                       {cartItem.name} {cartItem.year}
-    //                     </h4>
-    //                   </Link>
-    //                   <button className="btn-cart-qty">+</button>
-    //                   <input
-    //                     name="cartItemQty"
-    //                     onChange={this.handleChange}
-    //                     value={this.state.cartItemQty}
-    //                   />
-    //                   <button className="btn-cart-qty">-</button>
-    //                   <button
-    //                     className="btn-cart-delete"
-    //                     onClick={() => this.handleClick(cartItem.id)}
-    //                   >
-    //                     Delete
-    //                   </button>
-    //                   <ul>{cartItem.price}</ul>
-    //                   <ul>{cartItem.price * this.state.cartItemQty}</ul>
-    //                 </div>
-    //               ))}
-    //             </div>
-    //             <Link to={`/cart/checkout`}>
-    //               <button
-    //                 className="btn-large"
-    //                 onClick={() => this.handleClickCheckout()}
-    //               >
-    //                 CHECKOUT
-    //               </button>
-    //             </Link>
-    //           </div>
-    //         );
-    //       }
-    // =======
+    
     let cartItems = this.state.content;
     Object.keys(userInfo).length === 0 && userInfo.constructor === Object
       ? (cartItems = JSON.parse(localStorage.getItem("Cart")))
@@ -137,7 +81,6 @@ class Cart extends React.Component {
           <p>no items in the cart</p>
         </div>
       );
-      // >>>>>>> origin/AddButtonForLoggin
     }
     return (
       <div className="div-cart">
@@ -212,7 +155,6 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    //getCart: (id) => dispatch(fetchCart(id)),
     getCart: () => dispatch(fetchCart()),
     checkout: (cartItems) => dispatch(checkoutAll(cartItems)),
   };
@@ -220,13 +162,3 @@ const mapDispatch = (dispatch) => {
 
 export default connect(mapState, mapDispatch)(Cart);
 
-// if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
-//   let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
-//   if (storageCartItems) {
-//     // if (localStorage.length > 0) {
-//      let cartItems = storageCartItems;
-//   }
-//   }  else {
-//     let cartItems = this.props.cartItems;
-//     console.log(cartItems, "THIS IS CARTTTTTT");
-//   }
