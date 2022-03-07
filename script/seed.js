@@ -201,22 +201,22 @@ async function seed() {
   await wineries[3].setProducts(products[5]);
 
   //a cart can have many products
-  await carts[0].addProducts([
-    products[0],
-    products[2],
-    products[5],
-    products[3],
-  ]);
-  await carts[1].addProducts([products[1], products[6], products[4]]);
-  await carts[2].addProduct(products[8]);
-  await carts[3].addProduct(products[0]);
+  // await carts[0].addProducts([
+  //   products[0],
+  //   products[2],
+  //   products[5],
+  //   products[3],
+  // ]);
+  // await carts[1].addProducts([products[1], products[6], products[4]]);
+  // await carts[2].addProduct(products[8]);
+  // await carts[3].addProduct(products[0]);
 
-  // seed relationship btw Cart and User
-  //a user can have many carts
-  await users[0].setCarts([carts[0], carts[1]]);
-  await users[1].setCarts(carts[3]);
-  await users[2].setCarts(carts[4]);
-  await users[3].setCarts(carts[2]);
+  // // seed relationship btw Cart and User
+  // //a user can have many carts
+  // await users[0].setCarts([carts[0], carts[1]]);
+  // await users[1].setCarts(carts[3]);
+  // await users[2].setCarts(carts[4]);
+  // await users[3].setCarts(carts[2]);
 
   // set cart to see user connect to cart
 

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   models: { Cart, CartItems, Product },
 } = require("../db");
+const { requireToken, isAdmin } = require("./gateKeepingMiddleware");
 
 module.exports = router;
 
@@ -27,15 +28,17 @@ module.exports = router;
 //   }
 // });
 //need requirToken to get userId
-router.get("/", async (req, res, next) => {
+
+router.get("/", requireToken, async (req, res, next) => {
   try {
-      const cart = await Cart.findOne({
-        where: {
-          userId: 11,
-        },
-        include: Product,
-      });
-      res.send(cart);
+    const cart = await Cart.findOne({
+      where: {
+        userId: req.user.dataValues.id,
+        isPurchased: false,
+      },
+      include: Product,
+    });
+    res.send(cart);
   } catch (e) {
     next(e);
   }
@@ -43,26 +46,25 @@ router.get("/", async (req, res, next) => {
 //logged in user
 
 //need requirToken to get userId
-router.put("/checkout", async (req, res, next) => {
+router.put("/checkout", requireToken, async (req, res, next) => {
   try {
-    const cart = await Cart.findOne({
-      where:{
-      userId : 11,
-      isPurchased:false
-    }
+    let cart = await Cart.findOne({
+      where: {
+        userId: req.user.dataValues.id,
+        isPurchased: false,
+      },
     });
-    console.log('cart+++++',cart)
-    //not working in postico
-    //maybe use req.body to update cart
-    cart.isPurchased=true;
-    //console.log('cart+++++',cart.isPurchased)
-    res.send();
-      } catch (e) {
-        next(e);
-      }
+    await cart.update({ isPurchased: true });
+    cart = await Cart.create({
+      userId: req.user.dataValues.id,
+      isPurchased: false,
     });
-   
-  
+    //console.log('req.body in checkout+++++',req.body)
+    res.status(201);
+  } catch (e) {
+    next(e);
+  }
+});
 
 //     //  const cartItems = await CartItems.findAll( {
 
@@ -112,7 +114,6 @@ router.put("/checkout", async (req, res, next) => {
 //   }
 // });
 
-
 // router.get("/:id", async (req, res, next) => {
 //   try {
 //     const cart = await Cart.findByPk(req.params.id, {
@@ -124,8 +125,6 @@ router.put("/checkout", async (req, res, next) => {
 //     next(e);
 //   }
 // });
-
-
 
 // router.put("/checkout/:userId", async (req, res, next) => {
 //   try {
@@ -139,25 +138,25 @@ router.put("/checkout", async (req, res, next) => {
 //       ],
 //     });
 
-    //  const cartItems = await CartItems.findAll( {
+//  const cartItems = await CartItems.findAll( {
 
-    //    //where: {cartId:cart.id}
+//    //where: {cartId:cart.id}
 
-    //  });
+//  });
 
-    //const products = await Product.findByPk(cartItems.productId)
+//const products = await Product.findByPk(cartItems.productId)
 
-    //const products = await Product.findByPk(cart.products);
+//const products = await Product.findByPk(cart.products);
 
-    // console.log('products',cartItems.productId)
+// console.log('products',cartItems.productId)
 
-    // cart.isPurchased = true;
+// cart.isPurchased = true;
 
-    //substract quantity in product table
+//substract quantity in product table
 
-    //products.quantity = products.quantity - cart.product.productQuantity;
+//products.quantity = products.quantity - cart.product.productQuantity;
 
-    //send new produts quantity to front end to update the state?
+//send new produts quantity to front end to update the state?
 
 //     res.send(await cart.update(req.body));
 //   } catch (e) {

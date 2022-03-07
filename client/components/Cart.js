@@ -19,8 +19,8 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.userInfo, "THIS PROPS INSIDE COMPON DID MOUNT");
     this.props.getCart();
+    console.log('this.props.cart', this.props.cart);
   }
   handleClick(id) {
     let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
@@ -67,15 +67,15 @@ class Cart extends React.Component {
   }
 
   render() {
-    
-    console.log(this.props.userInfo);
+    //need to fix key unique...
     const userInfo = this.props.userInfo;
     
     let cartItems = this.state.content;
+    console.log('cartItems', cartItems);
     Object.keys(userInfo).length === 0 && userInfo.constructor === Object
       ? (cartItems = JSON.parse(localStorage.getItem("Cart")))
-      : (cartItems = this.props.cartItems);
-    if (!cartItems) {
+      : (cartItems = this.props.cart);
+    if (!cartItems || cartItems.length ===0) {
       return (
         <div>
           <p>no items in the cart</p>
@@ -133,7 +133,7 @@ class Cart extends React.Component {
             onClick={() => {
               Object.keys(userInfo).length === 0
                 ? this.handleClickCheckout()
-                : this.props.checkout({ ...this.state });
+                : this.props.checkout(this.props.cart);
             }}
           >
             CHECKOUT
@@ -145,11 +145,10 @@ class Cart extends React.Component {
 }
 
 const mapState = (state) => {
-  console.log(state);
+ console.log(state, "THESE ARE THE STATES IN CART CP");
   return {
     cart: state.cart,
     userInfo: state.auth,
-    cartItems: state.cartItems,
   };
 };
 
