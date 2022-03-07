@@ -5,87 +5,64 @@ const {
 
 module.exports = router;
 
-router.post("/", async (req, res, next) => {
+// router.post("/", async (req, res, next) => {
+//   try {
+//     const userId = req.body.id;
+
+//     //guest cart
+//     // if(!userId) {
+
+//     // }
+//     if (userId) {
+//       const cart = await Cart.findAll({
+//         where: {
+//           userId: userId,
+//         },
+//         include: Product,
+//       });
+//       res.send(cart);
+//     }
+//   } catch (e) {
+//     next(e);
+//   }
+// });
+//need requirToken to get userId
+router.get("/", async (req, res, next) => {
   try {
-    const userId = req.body.id;
-
-    //guest cart
-    // if(!userId) {
-
-    // }
-    if (userId) {
-      const cart = await Cart.findAll({
+      const cart = await Cart.findOne({
         where: {
-          userId: userId,
+          userId: 11,
         },
         include: Product,
       });
       res.send(cart);
-    }
   } catch (e) {
     next(e);
   }
 });
-
 //logged in user
 
-router.post("/add/:productId", async (req, res, next) => {
+//need requirToken to get userId
+router.put("/checkout", async (req, res, next) => {
   try {
-    //if(user)
-
-    const product = await Product.findByPk(req.body.id);
-
-    const cart = await Cart.findAll({where:{userId: user.id}})
-
-    //await cart.addProduct(product)
-
-    //if(!token){
-
-    //err
-
-    //}
-
-    //const newCart = Cart.create(req.body)
-
-    // const productId = req.body.id;
-
-    // const price = req.body.price;
-
-    // const quantity = req.body.quantity;
-
-    // req.body.productQuantity = quantity;
-
-    // req.body.itemsPriceTotal = price * quantity;
-
-    // req.body.productId = productId;
-
-    // req.body.cartId = 1;
-
-    // console.log('>>>>>>>>>req.body',products)
-
-    //await CartItems.create(req.body)
-
-    //const cart =  await Cart.findByPk(req.params.id
-
-    // const newCartItems = await CartItems.create(req.params.id);
-
-    res.send(201);
-  } catch (e) {
-    next(e);
-  }
-});
-
-// router.put("/checkout/:userId", async (req, res, next) => {
-//   try {
-//     //if user exists, find the cart
-
-//     const cart = await Cart.findByPk(1, {
-//       include: [
-//         {
-//           model: Product,
-//         },
-//       ],
-//     });
+    const cart = await Cart.findOne({
+      where:{
+      userId : 11,
+      isPurchased:false
+    }
+    });
+    console.log('cart+++++',cart)
+    //not working in postico
+    //maybe use req.body to update cart
+    cart.isPurchased=true;
+    //console.log('cart+++++',cart.isPurchased)
+    res.send();
+      } catch (e) {
+        next(e);
+      }
+    });
+   
+  
 
 //     //  const cartItems = await CartItems.findAll( {
 

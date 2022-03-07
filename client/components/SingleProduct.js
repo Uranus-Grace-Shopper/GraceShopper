@@ -1,46 +1,47 @@
 import React from "react";
-
 import { connect } from "react-redux";
-
 import { fetchSingleProduct } from "../store/singleProduct";
-
-import { me } from "../store";
+import { addingProductsToCart } from "../store/cartItems";
 
 class SingleProduct extends React.Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleSubmit(evt) {
     evt.preventDefault();
     //guest user
-    // if (this.props.isLoggedIn) {
-    //if there is a cart
-    let chosenWine = this.props.singleProduct;
-    let chosenWineId = this.props.singleProduct.id;
+    const userInfo = this.props.userInfo;
+    if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
+      //if there is a cart
+      let chosenWine = this.props.singleProduct;
+      let chosenWineId = this.props.singleProduct.id;
 
-    let wineInCart = JSON.parse(localStorage.getItem("Cart"));
-    console.log("wine in the cart >>>>> ", wineInCart);
-    if (!wineInCart) {
-      localStorage.setItem("Cart", JSON.stringify([chosenWine]));
-    } else {
-      let isWineAlreadyInCart = false;
-      wineInCart.forEach((wine) => {
-        if (wine.id === chosenWineId) {
-          alert(
-            "This wine is already in the cart. \nUpdate the quantity in your cart page."
-          );
-          isWineAlreadyInCart = true;
+      let wineInCart = JSON.parse(localStorage.getItem("Cart"));
+      console.log("wine in the cart >>>>> ", wineInCart);
+      if (!wineInCart) {
+        localStorage.setItem("Cart", JSON.stringify([chosenWine]));
+      } else {
+        let isWineAlreadyInCart = false;
+        wineInCart.forEach((wine) => {
+          if (wine.id === chosenWineId) {
+            alert(
+              "This wine is already in the cart. \nUpdate the quantity in your cart page."
+            );
+            isWineAlreadyInCart = true;
+          }
+        });
+
+        if (!isWineAlreadyInCart) {
+          wineInCart.push(chosenWine);
+          localStorage.setItem("Cart", JSON.stringify(wineInCart));
         }
-      });
-
-      if (!isWineAlreadyInCart) {
-        wineInCart.push(chosenWine);
-        localStorage.setItem("Cart", JSON.stringify(wineInCart));
       }
+    } else {
+      this.props.addingProductsToCart(this.props.singleProduct.id);
     }
 
+    //
     // if (localStorage.length > 0) {
     //   // let cart = [];
     //   if (localStorage.getItem("Cart")) {
@@ -92,14 +93,14 @@ const mapState = (state) => {
   // console.log("state", state.auth);
   return {
     singleProduct: state.singleProduct,
-    // isLoggedIn: !!state.auth.id,
+    userInfo: state.auth,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     fetchSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
-    //loadInitialData:() => dispatch(me())
+    addingProductsToCart: (id) => dispatch(addingProductsToCart(id)),
   };
 };
 
