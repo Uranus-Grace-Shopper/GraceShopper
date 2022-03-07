@@ -21,10 +21,21 @@ class SingleProduct extends React.Component {
     let chosenWineId = this.props.singleProduct.id;
 
     let wineInCart = JSON.parse(localStorage.getItem("Cart"));
+    console.log("wine in the cart >>>>> ", wineInCart);
     if (!wineInCart) {
       localStorage.setItem("Cart", JSON.stringify([chosenWine]));
     } else {
-      if (!(chosenWineId in wineInCart)) {
+      let isWineAlreadyInCart = false;
+      wineInCart.forEach((wine) => {
+        if (wine.id === chosenWineId) {
+          alert(
+            "This wine is already in the cart. \nUpdate the quantity in your cart page."
+          );
+          isWineAlreadyInCart = true;
+        }
+      });
+
+      if (!isWineAlreadyInCart) {
         wineInCart.push(chosenWine);
         localStorage.setItem("Cart", JSON.stringify(wineInCart));
       }
