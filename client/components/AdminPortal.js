@@ -1,53 +1,38 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchUsers, fetchToken } from "../store/user";
+import { fetchAllUsersThunk, fetchTokenThunk } from "../store/users";
 
 class AdminPortal extends React.Component {
   componentDidMount() {
-    this.props.getUsers();
-
-    // this.props.getToken();
+    this.props.getUers();
+    this.props.getToken();
   }
   render() {
-    console.log("is this propssss", this.props);
-    // const isAdmin = this.props.isAdmin;
-    const users = this.props.allUsers || [];
-    console.log("users", users);
-    // const token = this.props.token;
-    // console.log("is this tokenn?????", token)
-    // if (token) {
-
-      // const users = this.props.allUsers;
-      return (
+    const allUsers = this.props.allUsers;
+    return (
+      <div>
         <div>
-          <div className="div-all-users">
-            {users.map((user) => (
-              <div key={user.id} className="div-each-user">
-                <div className="div-username">{user.username}</div>
-              </div>
-            ))}
-          </div>
+          {allUsers.map((user) => (
+            <div key={user.id}>
+              <ul> {user.username}</ul>
+            </div>
+          ))}
         </div>
-      );
-    
-    // } else {
-    //   return <div>"Access Denied"</div>;
-    // }
+      </div>
+    );
   }
 }
 
 const mapState = (state) => {
-  console.log("what is stateeee", state);
   return {
-    allUsers: state.user
-    // token: state.users.token
+    allUsers: state.users,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    getUsers: () => dispatch(fetchUsers()),
-    // getToken: () => dispatch(fetchToken())
+    getUers: () => dispatch(fetchAllUsersThunk()),
+    getToken: () => dispatch(fetchTokenThunk()),
   };
 };
 

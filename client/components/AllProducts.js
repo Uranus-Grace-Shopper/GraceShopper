@@ -10,7 +10,7 @@ class AllProducts extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(evt) {
+  handleClick(evt) {
     evt.preventDefault();
     const products = this.props.allProducts;
     for (let i = 0; i < products.length; i++) {

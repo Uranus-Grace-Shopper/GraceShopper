@@ -1,24 +1,21 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-image: linear-gradient(
-    95.2deg,
-    rgb(250, 235, 255) 26.8%,
-    rgb(241, 253, 253) 64%
-  );
+  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(255, 255, 255);
 }
 
 a {
   text-decoration: none;
 }
 
-label {
+/* label {
   display: block;
-}
+} */
 
 nav a {
-  display: inline-block;
+  /* display: inline-block; */
   margin: 1em;
+  width: 20%;
+  color: black;
 }
 
 form div {
@@ -61,35 +58,50 @@ form div {
 
 .product-name {
   font-weight: bold;
+  color: black;
 }
 
-img {
+.product-name:hover {
+  color: #9e2666;
+}
+.cart-item-container img {
   width: auto;
   height: 50px;
   padding: 20px;
 }
 
+.cart-item-container a {
+  width: 60%;
+}
+
 nav {
   align-items: center;
-  /* background-color: #aad5d7;
-  color: #264e70; */
+  background-color: #edecfa;
+  color: #264e70;
   display: flex;
   justify-content: space-around;
   height: 100px;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0.2em;
+}
+
+nav a:hover {
+  color: #9e2666;
+  font-weight: bold;
 }
 
 .cart-item-container {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: #aad5d7;
+  background: #edecfa;
   margin: 20px;
 }
 
 .title {
   padding: 50px;
   text-align: center;
-  color: #aad5d7;
+  color: rgb(96, 60, 110);
   font-size: 2em;
   letter-spacing: 0.25em;
   font-weight: 700;
@@ -119,15 +131,21 @@ nav {
 
 .btn-large:hover {
   border: none;
-  color: #2d3235;
-  background: #aad5d7;
+  color: #ffffff;
+  background: rgb(96, 60, 110);
 }
 
 .logo {
   padding: 0px;
   margin: 0px;
-  width: 20%;
-  height: 20%;
+  width: 50%;
+  height: 50%;
+}
+
+.container-main-page {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .img-main {
@@ -135,18 +153,139 @@ nav {
   height: auto;
   margin: 0px;
   padding: 0px;
-  opacity: 0.8;
+  align-self: center;
+  background-position: top right;
+
+  /* opacity: 0.8; */
 }
 
 #welcome-text {
-  font-family: "Lato", sans-serif;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   letter-spacing: 0.2em;
   text-align: center;
-  font-size: 60px;
-  position: absolute;
+  font-size: 3em;
+  /* position: absolute;
   top: 35%;
   left: 50%;
+  transform: translate(-50%, -50%); */
+  color: rgb(96, 60, 110);
+  /* text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7); */
+}
+
+.container-confirmation {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.img-confirmation {
+  width: 50%;
+  height: auto;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-wine {
+  width: auto;
+  height: 400px;
+  align-self: center;
+}
+
+table {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td {
+  padding: 10px;
+  vertical-align: text-top;
+}
+
+.product-details button {
+  align-self: center;
+}
+
+/* login */
+.text-center {
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+  font-size: 23px;
+  margin: -50px 0 80px 0;
+  display: block;
+  text-align: center;
+}
+.box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  color: rgb(255, 255, 255);
-  text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
+  background-color: #edecfa;
+  border-radius: 3px;
+  padding: 70px 100px;
+}
+.input-container {
+  position: relative;
+  margin-bottom: 25px;
+}
+.input-container label {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 16px;
+  color: rgb(180, 180, 180);
+  transition: all 0.5s ease-in-out;
+}
+.input-container input {
+  border: 0;
+  border-bottom: 1px solid #555;
+  background: transparent;
+  width: 100%;
+  padding: 8px 0 5px 0;
+  margin: 10px;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+}
+.input-container input:focus {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #e74c3c;
+}
+.btn {
+  color: rgb(0, 0, 0);
+  background-color: rgb(96, 60, 110);
+  outline: none;
+  border: 0;
+  color: #fff;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  margin-top: 50px;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.input-container input:focus ~ label,
+.input-container input:valid ~ label {
+  top: -12px;
+  font-size: 12px;
+}
+/* 
+.div-cart {
+  width: 80%;
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+} */
+.cart-total-price {
+  text-align: end;
+  width: 90%;
+}
+
+.qty-dropdown {
+  width: 50px;
+  margin: 5px;
 }
