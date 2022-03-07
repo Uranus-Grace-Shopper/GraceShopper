@@ -1,7 +1,9 @@
 const router = require("express").Router();
 const {
-  models: { Cart, CartItems, Product },
+  models: { Cart, CartItems, Product},
 } = require("../db");
+const { requireToken, isAdmin } = require("./gateKeepingMiddleware");
+
 
 module.exports = router;
 
@@ -27,11 +29,11 @@ module.exports = router;
 //   }
 // });
 //need requirToken to get userId
-router.get("/", async (req, res, next) => {
+router.get("/", requireToken, async (req, res, next) => {
   try {
       const cart = await Cart.findOne({
         where: {
-          userId: 11,
+          userId: req.user.dataValues.id,
         },
         include: Product,
       });
@@ -43,11 +45,11 @@ router.get("/", async (req, res, next) => {
 //logged in user
 
 //need requirToken to get userId
-router.put("/checkout", async (req, res, next) => {
+router.put("/checkout", requireToken, async (req, res, next) => {
   try {
     const cart = await Cart.findOne({
       where:{
-      userId : 11,
+      userId : req.user.dataValues.id,
       isPurchased:false
     }
     });

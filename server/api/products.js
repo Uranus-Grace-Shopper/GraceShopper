@@ -3,6 +3,7 @@ const {
   models: { Product, Winery, Cart },
 } = require("../db");
 const { Op } = require("@sequelize/core");
+const { requireToken, isAdmin } = require("./gateKeepingMiddleware");
 module.exports = router;
 
 router.get("/", async (req, res, next) => {
@@ -26,7 +27,6 @@ router.get("/", async (req, res, next) => {
 router.get("/:productId", async (req, res, next) => {
   try {
     const singleProduct = await Product.findByPk(req.params.productId);
-    console.log(singleProduct);
     res.send(singleProduct);
   } catch (error) {
     next(error);
@@ -34,12 +34,13 @@ router.get("/:productId", async (req, res, next) => {
 });
 
 // put requireToken before async when it works
-router.post("/:productId", async (req, res, next) => {
+router.post("/:productId", requireToken, async (req, res, next) => {
   try {
+    console.log(req.user.dataValues.id, "token is hereeeee")
     const singleProduct = await Product.findByPk(req.params.productId);
     const cart = await Cart.findOne({
       where: {
-        userId: 3, 
+        userId: req.user.dataValues.id, 
         isPurchased: false
       }
     })

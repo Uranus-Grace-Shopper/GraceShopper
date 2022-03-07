@@ -45,7 +45,12 @@ const checkOut = (cartItmes) => {
 export const fetchCart = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/api/cart/`);
+      const token = window.localStorage.getItem("token")
+      const { data } = await axios.get(`/api/cart/`, {
+        headers: {
+          authorization: token,
+        },
+      });
       // console.log("data >>>>>>>>", data);
       dispatch(setCart(data));
     } catch (err) {
