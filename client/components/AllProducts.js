@@ -7,34 +7,12 @@ import Winery from "./Winery";
 class AllProducts extends React.Component {
   constructor() {
     super();
-    // this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      variety: '' 
+    }
     this.findOneWine = this.findOneWine.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-
-  // handleSubmit(evt) {
-  //   evt.preventDefault();
-  //   const products = this.props.allProducts;
-  //   for (let i = 0; i < products.length; i++) {
-  //     console.log(evt.target);
-  //     let chosenWine = product[i];
-  //     console.log("chosen wine >>>>>>>>", chosenWine);
-  //     let chosenWineId = products[i].id;
-  //     console.log("wine id >>>>>>", chosenWineId);
-
-  //     let wineInCart = JSON.parse(localStorage.getItem("Cart"));
-  //     if (chosenWine) {
-  //       if (!wineInCart) {
-  //         localStorage.setItem("Cart", JSON.stringify(chosenWine));
-  //         console.log(products[i]);
-  //       } else {
-  //         if (!(chosenWineId in wineInCart)) {
-  //           wineInCart.push(chosenWine);
-  //           localStorage.setItem("Cart", JSON.stringify(wineInCart));
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 
   findOneWine(wine) {
     const products = this.props.allProducts;
@@ -63,6 +41,18 @@ class AllProducts extends React.Component {
     }
   }
 
+  handleChange (evt) {
+    if (evt.target.value === 'red') {
+      this.setState({variety: evt.target.value})
+      console.log(this.state.variety)
+    } else if (evt.target.value === 'white') {
+      this.setState({variety: evt.target.value})
+    } else {
+      this.setState({variety: ''})
+    }
+    return this.state.variety
+  }
+
   componentDidMount() {
     this.props.getProducts();
   }
@@ -70,6 +60,12 @@ class AllProducts extends React.Component {
     const products = this.props.allProducts;
     return (
       <div>
+        <label>Select wine type:</label>
+        <select>
+          <option value="red" onClick={() => this.handleChange}>Red</option>
+          <option value="white" onClick={() => this.handleChange}>White</option>
+        </select>
+        
         <div className="div-all-products">
           {products.map((product) => (
             <div key={product.id} className="div-each-product">
@@ -84,7 +80,6 @@ class AllProducts extends React.Component {
                   </p>
                 </Link>
               </div>
-              {/* <form onSubmit={() => this.handleSubmit(product.id)}> */}
                 <button
                   onClick={() => this.findOneWine(product)}
                   className="btn-large"
@@ -92,7 +87,6 @@ class AllProducts extends React.Component {
                 >
                   ADD TO CART
                 </button>
-              {/* </form> */}
             </div>
           ))}
         </div>
