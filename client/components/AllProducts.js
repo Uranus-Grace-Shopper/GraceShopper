@@ -5,6 +5,64 @@ import { Link } from "react-router-dom";
 import Winery from "./Winery";
 
 class AllProducts extends React.Component {
+  constructor() {
+    super();
+    // this.handleSubmit = this.handleSubmit.bind(this);
+    this.findOneWine = this.findOneWine.bind(this);
+  }
+
+  // handleSubmit(evt) {
+  //   evt.preventDefault();
+  //   const products = this.props.allProducts;
+  //   for (let i = 0; i < products.length; i++) {
+  //     console.log(evt.target);
+  //     let chosenWine = product[i];
+  //     console.log("chosen wine >>>>>>>>", chosenWine);
+  //     let chosenWineId = products[i].id;
+  //     console.log("wine id >>>>>>", chosenWineId);
+
+  //     let wineInCart = JSON.parse(localStorage.getItem("Cart"));
+  //     if (chosenWine) {
+  //       if (!wineInCart) {
+  //         localStorage.setItem("Cart", JSON.stringify(chosenWine));
+  //         console.log(products[i]);
+  //       } else {
+  //         if (!(chosenWineId in wineInCart)) {
+  //           wineInCart.push(chosenWine);
+  //           localStorage.setItem("Cart", JSON.stringify(wineInCart));
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  findOneWine(wine) {
+    const products = this.props.allProducts;
+    let wineInCart = JSON.parse(localStorage.getItem("Cart"));
+    if (!wineInCart) {
+      products.forEach((product) => {
+        if (product.id === wine.id) {
+          localStorage.setItem("Cart", JSON.stringify([wine]));
+        }
+      });
+    } else {
+      let isWineAlreadyInCart = false;
+      wineInCart.forEach((product) => {
+        if (wine.id === product.id) {
+          alert(
+            "This wine is already in the cart. \nUpdate the quantity in your cart page."
+          );
+          isWineAlreadyInCart = true;
+        }
+      });
+
+      if (!isWineAlreadyInCart) {
+        wineInCart.push(wine);
+        localStorage.setItem("Cart", JSON.stringify(wineInCart));
+      }
+    }
+  }
+
   componentDidMount() {
     this.props.getProducts();
   }
@@ -26,7 +84,15 @@ class AllProducts extends React.Component {
                   </p>
                 </Link>
               </div>
-              <button onClick = {()=>console.log(product.id)} className="btn-large">ADD TO CART</button>
+              {/* <form onSubmit={() => this.handleSubmit(product.id)}> */}
+                <button
+                  onClick={() => this.findOneWine(product)}
+                  className="btn-large"
+                  type="submit"
+                >
+                  ADD TO CART
+                </button>
+              {/* </form> */}
             </div>
           ))}
         </div>
