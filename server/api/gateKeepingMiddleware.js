@@ -5,6 +5,7 @@ const {
 /* store functions that will act as middleware between
  our request and our response. */
 
+// JOE CR: Let's review this middleware as a team--it's valuable for everyone to understand!
 const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization || req.body.headers.authorization;

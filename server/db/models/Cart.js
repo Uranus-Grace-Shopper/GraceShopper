@@ -6,6 +6,7 @@ const Cart = db.define("cart", {
         type: Sequelize.BOOLEAN,
         defaultValue: false
     },
+    // JOE CR: Is this column necessary? What sort of work have you had to do to keep it accurate?
     cartPriceTotal: {
         type: Sequelize.DECIMAL
     }

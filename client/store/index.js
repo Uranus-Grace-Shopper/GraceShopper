@@ -9,6 +9,8 @@ import cart from "./cart";
 import users from "./users";
 import cartItems from "./cartItems"
 
+// JOE CR: The indenting in these Redux files is pretty messy. Use those formatters!
+// JOE CR: Why separate keys for cart and cartItems?
 const reducer = combineReducers({ auth, products, singleProduct, cart, users, cartItems});
 
 const middleware = composeWithDevTools(

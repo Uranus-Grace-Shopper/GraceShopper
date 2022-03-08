@@ -4,7 +4,9 @@ import { fetchAllUsersThunk, fetchTokenThunk } from "../store/users";
 
 class AdminPortal extends React.Component {
   componentDidMount() {
+    // JOE CR: Uer model
     this.props.getUers();
+    // JOE CR: Why is this called "getToken"?
     this.props.getToken();
   }
   render() {

@@ -11,6 +11,7 @@ router.get("/", async (req, res, next) => {
     const products = await Product.findAll({
       where: {
         quantity: {
+          // JOE CR: Nice usage of the greater than operator!
           [Op.gt]: 0,
         },
       },
@@ -34,6 +35,8 @@ router.get("/:productId", async (req, res, next) => {
 });
 
 // put requireToken before async when it works
+// JOE CR: This is okay but I was a little surprised to find a route that would add a product to cart here
+// in products router instead of the cart router. Let's discuss the flexibility of our server's interface and pros/cons.
 router.post("/:productId", requireToken, async (req, res, next) => {
   try {
     // console.log(req.user.dataValues.id, "token is hereeeee")

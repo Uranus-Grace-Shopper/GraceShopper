@@ -14,6 +14,7 @@ class AllProducts extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  // JOE CR: What if the user is logged in? What is the status of logged-in/logged-out cart?
   findOneWine(wine) {
     const products = this.props.allProducts;
     let wineInCart = JSON.parse(localStorage.getItem("Cart"));
@@ -81,11 +82,15 @@ class AllProducts extends React.Component {
         <div className="div-all-products">
           {products.map((product) => (
             <div key={product.id} className="div-each-product">
+              {/* JOE CR: Although it works, nested ternaries are very difficult to read.
+                  What can be done instead?
+              */}
               {this.state.variety === product.variety ? (
                 <div>
                   <img className="img-all-products" src={product.imageURL} />
                   <div className="txt-each-product">
                     <div>
+                      {/* JOE CR: I like the use of nested components and passing props! An important strategy. */}
                       <Winery winery={product.winery} />
                     </div>
                     <Link to={`/products/${product.id}`}>

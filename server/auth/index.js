@@ -23,6 +23,7 @@ router.post("/signup", async (req, res, next) => {
     //if user creates user with postman, only username and password would be successfully created.
     //isAdmin will be defaulted to false
     const user = await User.create({ username, password });
+    // JOE CR: Good idea! This could also be done on the first item added to a cart.
     const cart = await Cart.create({userId:user.id});
     res.send({ token: await user.generateToken() });
   } catch (err) {

@@ -28,6 +28,7 @@ const userData = [
     password: "123",
     isAdmin: true,
   },
+  // JOE CR: I understand why I'm not an admin but it doesn't make me any less upset about it.
   {
     username: "Joe",
     password: "123",

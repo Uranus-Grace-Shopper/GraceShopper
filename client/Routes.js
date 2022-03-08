@@ -32,6 +32,9 @@ class Routes extends Component {
           <Route exact path="/cart/checkout" component={ConfirmationPage} />
           <Route exact path="/admin" component={AdminPortal} />
         </Switch>
+        {/* JOE CR: There are other ways to include routes conditionally in the first <Switch>,
+            without needing separate <Switch> components. Let's discuss using ternaries or `&&`.
+        */}
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />

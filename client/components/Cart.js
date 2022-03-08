@@ -10,6 +10,7 @@ class Cart extends React.Component {
     this.state = {
       cartItemQty: 1,
       cartItemTotal: null,
+      // JOE CR: Random capitalized state key.
       QtyError: "",
       content: [],
     };

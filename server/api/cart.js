@@ -5,7 +5,7 @@ const {
 const { requireToken, isAdmin } = require("./gateKeepingMiddleware");
 
 module.exports = router;
-
+// JOE CR: Wassup huge commented out code. How you doin?
 // router.post("/", async (req, res, next) => {
 //   try {
 //     const userId = req.body.id;
@@ -29,10 +29,14 @@ module.exports = router;
 // });
 //need requirToken to get userId
 
+// JOE CR: I love love love that y'all got this route working with the user token and not being
+// passed cartId or userId. Very nice!!
 router.get("/", requireToken, async (req, res, next) => {
   try {
     const cart = await Cart.findOne({
       where: {
+        // JOE CR: Although it seems the case when console.logging, dataValues does not have to be used.
+        // Let's discuss what req.user.toJSON() would do.
         userId: req.user.dataValues.id,
         isPurchased: false,
       },
@@ -48,6 +52,8 @@ router.get("/", requireToken, async (req, res, next) => {
 //need requirToken to get userId
 router.put("/checkout", requireToken, async (req, res, next) => {
   try {
+    // JOE CR: Notice how often you are making the same kind of query to get a user's cart?
+    // This is the perfect opportunity for something like a class method!!
     let cart = await Cart.findOne({
       where: {
         userId: req.user.dataValues.id,
@@ -65,6 +71,8 @@ router.put("/checkout", requireToken, async (req, res, next) => {
     next(e);
   }
 });
+
+// JOE CR: The bottom of this file looks like a graveyard D:
 
 //     //  const cartItems = await CartItems.findAll( {
 

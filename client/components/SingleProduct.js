@@ -12,6 +12,8 @@ class SingleProduct extends React.Component {
     evt.preventDefault();
     //guest user
     const userInfo = this.props.userInfo;
+    // JOE CR: Can someone explain this conditional to me? I think I understand
+    // the goal but I'm not sure.
     if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
       //if there is a cart
       let chosenWine = this.props.singleProduct;
@@ -25,6 +27,8 @@ class SingleProduct extends React.Component {
         let isWineAlreadyInCart = false;
         wineInCart.forEach((wine) => {
           if (wine.id === chosenWineId) {
+            // JOE CR: Although convenient, the usage of alert() is generally frowned upon
+            // in the browser. Let's discuss why and other things we can do instead.
             alert(
               "This wine is already in the cart. \nUpdate the quantity in your cart page."
             );
@@ -38,6 +42,8 @@ class SingleProduct extends React.Component {
         }
       }
     } else {
+      // JOE CR: Here I see logged-in user cart happening; so how does this combine with the
+      // usage of localStorage only in the AllProducts component?
       this.props.addingProductsToCart(this.props.singleProduct.id);
     }
   }

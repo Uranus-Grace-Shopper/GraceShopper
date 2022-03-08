@@ -11,11 +11,16 @@ const Cart = require('./models/Cart')
 const CartItems = require('./models/CartItems')
 
 //associations could go here!
+
+// JOE CR: Inconsistent whitespacing on these lines. Are we using our formatters?
+
 Product.belongsTo (Winery)
 Winery.hasMany (Product)
 
 User.hasMany(Cart)
 Cart.belongsTo(User)
+
+// JOE CR: Let's discuss the result of this association.
 Product.belongsToMany( Cart, { through: CartItems})
 Cart.belongsToMany( Product, {through: CartItems})
 
