@@ -10,17 +10,15 @@ class Cart extends React.Component {
     this.state = {
       cartItemQty: 1,
       cartItemTotal: null,
-      QtyError: "",
       content: [],
     };
     this.handleChange = this.handleChange.bind(this);
-    this.validateQty = this.validateQty.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     this.props.getCart();
-    console.log('this.props.cart', this.props.cart);
+    console.log("this.props.cart", this.props.cart);
   }
   handleClick(id) {
     let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
@@ -31,31 +29,14 @@ class Cart extends React.Component {
   }
   // //needs an update
   handleChange(event) {
-    if (this.validateQty()) {
-      this.setState({
-        [event.target.name]: event.target.value,
-      });
-    }
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
   }
 
   handleClickCheckout() {
     localStorage.removeItem("Cart");
     this.setState({ content: [] });
-  }
-
-  //needs an update
-  validateQty() {
-    let QtyError = "";
-    if (this.state.cartItemQty > 20) {
-      //needs an update so it can read each products stockQty
-      QtyError = "Not enough bottles in stock.";
-    }
-    if (QtyError) {
-      event.preventDefault();
-      this.setState({ QtyError });
-      return false;
-    }
-    return true;
   }
 
   createDropDown(stockQty) {
@@ -69,16 +50,16 @@ class Cart extends React.Component {
   render() {
     //need to fix key unique...
     const userInfo = this.props.userInfo;
-    
+
     let cartItems = this.state.content;
-    console.log('cartItems', cartItems);
+    console.log("cartItems", cartItems);
     Object.keys(userInfo).length === 0 && userInfo.constructor === Object
       ? (cartItems = JSON.parse(localStorage.getItem("Cart")))
       : (cartItems = this.props.cart);
-    if (!cartItems || cartItems.length ===0) {
+    if (!cartItems || cartItems.length === 0) {
       return (
         <div>
-          <p>no items in the cart</p>
+          <h1 className="title">No items in the cart!</h1>
         </div>
       );
     }
@@ -145,7 +126,7 @@ class Cart extends React.Component {
 }
 
 const mapState = (state) => {
- console.log(state, "THESE ARE THE STATES IN CART CP");
+  console.log(state, "THESE ARE THE STATES IN CART CP");
   return {
     cart: state.cart,
     userInfo: state.auth,
@@ -160,4 +141,3 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(Cart);
-

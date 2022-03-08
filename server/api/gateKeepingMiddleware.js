@@ -8,7 +8,7 @@ const {
 const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization || req.body.headers.authorization;
-    console.log('token in middleware',req.body)
+    // console.log("token in middleware", req.body);
     const user = await User.findByToken(token);
     req.user = user;
     next();
