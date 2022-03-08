@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCart, checkoutAll } from "../store/cart";
+import { fetchCart, checkoutAll, deleteProductFromCart } from "../store/cart";
 import { Link } from "react-router-dom";
 import history from "../history";
 
@@ -20,7 +20,6 @@ class Cart extends React.Component {
 
   componentDidMount() {
     this.props.getCart();
-    console.log("this.props.cart", this.props.cart);
   }
   handleClick(id) {
     let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
@@ -40,29 +39,29 @@ class Cart extends React.Component {
     const userInfo = this.props.userInfo;
 
     let cartItems = this.state.content;
-    console.log("cartItems", cartItems);
+    console.log("cart props for cart Items", this.props.cart);
     Object.keys(userInfo).length === 0 && userInfo.constructor === Object
       ? (cartItems = JSON.parse(localStorage.getItem("Cart")))
       : (cartItems = this.props.cart);
     if (!cartItems || cartItems.length === 0) {
       return (
         <div>
-          <h1 className="title">No items in the cart!</h1>
+          <h1 className='title'>No items in the cart!</h1>
         </div>
       );
     }
     return (
-      <div className="div-cart">
-        <h1 className="title"> Your Cart</h1>
+      <div className='div-cart'>
+        <h1 className='title'> Your Cart</h1>
         {/* <div className="cart-headings">
           <ul>Product</ul>
           <ul>Quantity</ul>
           <ul>Unit Price</ul>
           <ul>Total Price</ul>
         </div> */}
-        <div className="cart-container">
+        <div className='cart-container'>
           {cartItems.map((cartItem) => (
-            <div key={cartItem.id} className="cart-item-container">
+            <div key={cartItem.id} className='cart-item-container'>
               <img src={cartItem.imageURL} />
               <Link to={`/products/${cartItem.id}`}>
                 <h4>
@@ -72,10 +71,18 @@ class Cart extends React.Component {
               <SingleWineCartQty cartItem={cartItem} />
 
               <button
-                className="btn-cart-delete"
-                onClick={() => this.handleClick(cartItem.id)}
+                className='btn-cart-delete'
+                onClick={() => {
+                  if (
+                    Object.keys(userInfo).length === 0 &&
+                    userInfo.constructor === Object
+                  ) {
+                    this.handleClick(cartItem.id);
+                  } else {
+                    this.props.deleteItem(cartItem.id);
+                  }
+                }}
               >
-                {/* need a if/else statement to delete items for loggedin user */}
                 Delete
               </button>
             </div>
@@ -83,13 +90,13 @@ class Cart extends React.Component {
         </div>
 
         <hr />
-        <div className="cart-total-price">
+        <div className='cart-total-price'>
           <p>CART TOTAL: </p>
         </div>
 
         <Link to={`/cart/checkout`}>
           <button
-            className="btn-large"
+            className='btn-large'
             onClick={() => {
               Object.keys(userInfo).length === 0
                 ? this.handleClickCheckout()
@@ -116,6 +123,7 @@ const mapDispatch = (dispatch) => {
   return {
     getCart: () => dispatch(fetchCart()),
     checkout: (cartItems) => dispatch(checkoutAll(cartItems)),
+    deleteItem: (cartItem) => dispatch(deleteProductFromCart(cartItem)),
   };
 };
 
