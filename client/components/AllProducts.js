@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
 import { Link } from "react-router-dom";
 import Winery from "./Winery";
+import { addingProductsToCart } from "../store/cart";
 
 class AllProducts extends React.Component {
   constructor() {
@@ -15,28 +16,44 @@ class AllProducts extends React.Component {
   }
 
   findOneWine(wine) {
+    const cart = this.props.cart;
     const products = this.props.allProducts;
-    let wineInCart = JSON.parse(localStorage.getItem("Cart"));
-    if (!wineInCart) {
-      products.forEach((product) => {
-        if (product.id === wine.id) {
-          localStorage.setItem("Cart", JSON.stringify([wine]));
+    const userInfo = this.props.userInfo;
+    if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
+      let wineInCart = JSON.parse(localStorage.getItem("Cart"));
+      if (!wineInCart) {
+        products.forEach((product) => {
+          if (product.id === wine.id) {
+            localStorage.setItem("Cart", JSON.stringify([wine]));
+          }
+        });
+      } else {
+        let isWineAlreadyInCart = false;
+        wineInCart.forEach((product) => {
+          if (wine.id === product.id) {
+            alert(
+              "This wine is already in the cart. \nUpdate the quantity in your cart page."
+            );
+            isWineAlreadyInCart = true;
+          }
+        });
+        if (!isWineAlreadyInCart) {
+          wineInCart.push(wine);
+          localStorage.setItem("Cart", JSON.stringify(wineInCart));
         }
-      });
+      }
     } else {
       let isWineAlreadyInCart = false;
-      wineInCart.forEach((product) => {
-        if (wine.id === product.id) {
+      cart.forEach((product) => {
+        if (product.id === wine.id) {
           alert(
             "This wine is already in the cart. \nUpdate the quantity in your cart page."
           );
           isWineAlreadyInCart = true;
         }
       });
-
       if (!isWineAlreadyInCart) {
-        wineInCart.push(wine);
-        localStorage.setItem("Cart", JSON.stringify(wineInCart));
+        this.props.addingProductsToCart(wine.id);
       }
     }
   }
@@ -138,12 +155,15 @@ class AllProducts extends React.Component {
 const mapState = (state) => {
   return {
     allProducts: state.products,
+    userInfo: state.auth,
+    cart: state.cart,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     getProducts: () => dispatch(fetchProducts()),
+    addingProductsToCart: (id) => dispatch(addingProductsToCart(id)),
   };
 };
 

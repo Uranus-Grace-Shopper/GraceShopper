@@ -11,7 +11,7 @@ class SingleProduct extends React.Component {
   findOneWine(wine) {
     //evt.preventDefault();
     //guest user
-    const cart = this.props.cart
+    const cart = this.props.cart;
     const userInfo = this.props.userInfo;
     if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
       let wineInCart = JSON.parse(localStorage.getItem("Cart"));
@@ -81,10 +81,13 @@ class SingleProduct extends React.Component {
               </tr>
             </tbody>
           </table>
-            <button className="btn-large" type="submit"
-            onClick = {()=>this.findOneWine(product)}>
-              ADD TO CART
-            </button>
+          <button
+            className="btn-large"
+            type="submit"
+            onClick={() => this.findOneWine(product)}
+          >
+            ADD TO CART
+          </button>
         </div>
       </div>
     );
@@ -96,7 +99,7 @@ const mapState = (state) => {
   return {
     singleProduct: state.singleProduct,
     userInfo: state.auth,
-    cart: state.cart
+    cart: state.cart,
   };
 };
 
