@@ -4,23 +4,23 @@ import { fetchCart, checkoutAll } from "../store/cart";
 import { Link } from "react-router-dom";
 import history from "../history";
 
+import SingleWineCartQty from "./SingleWineCartQty";
+
 class Cart extends React.Component {
   constructor() {
     super();
     this.state = {
       cartItemQty: 1,
       cartItemTotal: null,
-      QtyError: "",
       content: [],
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.validateQty = this.validateQty.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleClickCheckout = this.handleClickCheckout.bind(this);
   }
 
   componentDidMount() {
     this.props.getCart();
-    console.log('this.props.cart', this.props.cart);
+    console.log("this.props.cart", this.props.cart);
   }
   handleClick(id) {
     let storageCartItems = JSON.parse(localStorage.getItem("Cart"));
@@ -29,68 +29,37 @@ class Cart extends React.Component {
     const content = localStorage.getItem("Cart");
     this.setState({ content });
   }
-  // //needs an update
-  handleChange(event) {
-    if (this.validateQty()) {
-      this.setState({
-        [event.target.name]: event.target.value,
-      });
-    }
-  }
 
   handleClickCheckout() {
     localStorage.removeItem("Cart");
     this.setState({ content: [] });
   }
 
-  //needs an update
-  validateQty() {
-    let QtyError = "";
-    if (this.state.cartItemQty > 20) {
-      //needs an update so it can read each products stockQty
-      QtyError = "Not enough bottles in stock.";
-    }
-    if (QtyError) {
-      event.preventDefault();
-      this.setState({ QtyError });
-      return false;
-    }
-    return true;
-  }
-
-  createDropDown(stockQty) {
-    let elements = [];
-    for (let i = 1; i <= stockQty; i++) {
-      elements.push(<option key={i}>{i}</option>);
-    }
-    return elements;
-  }
-
   render() {
     //need to fix key unique...
     const userInfo = this.props.userInfo;
-    
+
     let cartItems = this.state.content;
-    console.log('cartItems', cartItems);
+    console.log("cartItems", cartItems);
     Object.keys(userInfo).length === 0 && userInfo.constructor === Object
       ? (cartItems = JSON.parse(localStorage.getItem("Cart")))
       : (cartItems = this.props.cart);
-    if (!cartItems || cartItems.length ===0) {
+    if (!cartItems || cartItems.length === 0) {
       return (
         <div>
-          <p>no items in the cart</p>
+          <h1 className="title">No items in the cart!</h1>
         </div>
       );
     }
     return (
       <div className="div-cart">
         <h1 className="title"> Your Cart</h1>
-        <div className="cart-headings">
+        {/* <div className="cart-headings">
           <ul>Product</ul>
           <ul>Quantity</ul>
           <ul>Unit Price</ul>
           <ul>Total Price</ul>
-        </div>
+        </div> */}
         <div className="cart-container">
           {cartItems.map((cartItem) => (
             <div key={cartItem.id} className="cart-item-container">
@@ -100,14 +69,7 @@ class Cart extends React.Component {
                   {cartItem.name} {cartItem.year}
                 </h4>
               </Link>
-              <select
-                className="qty-dropdown"
-                name="cartItemQty"
-                onChange={this.handleChange}
-                value={this.state.cartItemQty}
-              >
-                {this.createDropDown(cartItem.quantity)}
-              </select>
+              <SingleWineCartQty cartItem={cartItem} />
 
               <button
                 className="btn-cart-delete"
@@ -116,8 +78,6 @@ class Cart extends React.Component {
                 {/* need a if/else statement to delete items for loggedin user */}
                 Delete
               </button>
-              <ul>{cartItem.price}</ul>
-              <ul>{cartItem.price * this.state.cartItemQty}</ul>
             </div>
           ))}
         </div>
@@ -145,7 +105,7 @@ class Cart extends React.Component {
 }
 
 const mapState = (state) => {
- console.log(state, "THESE ARE THE STATES IN CART CP");
+  console.log(state, "THESE ARE THE STATES IN CART CP");
   return {
     cart: state.cart,
     userInfo: state.auth,
@@ -160,4 +120,3 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(Cart);
-
