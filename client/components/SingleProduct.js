@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchSingleProduct } from "../store/singleProduct";
-import { addingProductsToCart } from "../store/cartItems";
+import { addingProductsToCart } from "../store/cart";
 
 class SingleProduct extends React.Component {
   constructor() {
@@ -12,11 +12,10 @@ class SingleProduct extends React.Component {
     evt.preventDefault();
     //guest user
     const userInfo = this.props.userInfo;
+    let chosenWine = this.props.singleProduct;
+    let chosenWineId = this.props.singleProduct.id;
     if (Object.keys(userInfo).length === 0 && userInfo.constructor === Object) {
       //if there is a cart
-      let chosenWine = this.props.singleProduct;
-      let chosenWineId = this.props.singleProduct.id;
-
       let wineInCart = JSON.parse(localStorage.getItem("Cart"));
       console.log("wine in the cart >>>>> ", wineInCart);
       if (!wineInCart) {
@@ -31,14 +30,13 @@ class SingleProduct extends React.Component {
             isWineAlreadyInCart = true;
           }
         });
-
         if (!isWineAlreadyInCart) {
           wineInCart.push(chosenWine);
           localStorage.setItem("Cart", JSON.stringify(wineInCart));
         }
       }
     } else {
-      this.props.addingProductsToCart(this.props.singleProduct.id);
+      this.props.addingProductsToCart(chosenWineId);
     }
   }
 
@@ -53,7 +51,7 @@ class SingleProduct extends React.Component {
     const product = this.props.singleProduct;
     return (
       <div className="single-product">
-        <form onSubmit={this.handleSubmit}>
+       
           <div className="product-details">
             <img className="img-wine" src={product.imageURL} />
             <table>
@@ -76,11 +74,13 @@ class SingleProduct extends React.Component {
                 </tr>
               </tbody>
             </table>
+            <form onSubmit={this.handleSubmit}>
             <button className="btn-large" type="submit">
               ADD TO CART
             </button>
+            </form>
           </div>
-        </form>
+        
       </div>
     );
   }
