@@ -31,7 +31,7 @@ class SingleWineCartQty extends React.Component {
     const singleItemInCart = this.props.cartItem;
     // console.log("******************", singleItemInCart);
     return (
-      <div className="cart-item-qty-dropdown-container">
+      <div className="cart-item-qty-price-container">
         <select
           className="qty-dropdown"
           name="cartItemQty"
@@ -40,6 +40,10 @@ class SingleWineCartQty extends React.Component {
         >
           {this.createDropDown(singleItemInCart.quantity)}
         </select>
+        <ul className="price-unit">${singleItemInCart.price} /bottle </ul>
+        <ul className="price-total-per-wine">
+          ${singleItemInCart.price * this.state.cartItemQty}
+        </ul>
       </div>
     );
   }

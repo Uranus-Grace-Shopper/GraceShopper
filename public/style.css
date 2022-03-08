@@ -289,3 +289,21 @@ td {
   width: 50px;
   margin: 5px;
 }
+
+.cart-item-qty-price-container {
+  display: flex;
+  align-items: center;
+}
+
+.qty-dropdown {
+  height: 20px;
+}
+
+.cart-item-qty-price-container ul {
+  width: 80px;
+}
+
+.price-total-per-wine {
+  color: rgb(85, 9, 116);
+  font-weight: bold;
+}
