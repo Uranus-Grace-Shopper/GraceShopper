@@ -1,11 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchAllUsersThunk, fetchTokenThunk } from "../store/users";
+import { fetchAllUsersThunk } from "../store/users";
 
 class AdminPortal extends React.Component {
   componentDidMount() {
-    this.props.getUers();
-    this.props.getToken();
+    this.props.getUsers();
   }
   render() {
     const allUsers = this.props.allUsers;
@@ -31,8 +30,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getUers: () => dispatch(fetchAllUsersThunk()),
-    getToken: () => dispatch(fetchTokenThunk()),
+    getUsers: () => dispatch(fetchAllUsersThunk()),
   };
 };
 

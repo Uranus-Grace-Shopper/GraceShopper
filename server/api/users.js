@@ -18,3 +18,12 @@ router.get("/", requireToken, isAdmin, async (req, res, next) => {
     next(err);
   }
 });
+
+// router.post ("/", requireToken, isAdmin, async (req, res, next) => {
+//   try {
+//     const users = await User.create(req.body);
+//     res.json(users);
+//   } catch (err) {
+//     next(err);
+//   }
+// });

@@ -56,11 +56,15 @@ export const addingProductsToCart = (id) => {
     try {
       const token = window.localStorage.getItem("token");
       console.log("+++++++++", token);
-      const { data } = await axios.post(`/api/products/${id}`, {
-        headers: {
-          authorization: token,
-        },
-      });
+      const { data } = await axios.post(
+        `/api/products/${id}`,
+        {},
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
       dispatch(addNewProductsToCart(data));
     } catch (err) {
       console.log(err);

@@ -24,6 +24,17 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// router.post("/", requireToken, isAdmin, async (req, res, next) => {
+//   try {
+
+//     const newProduct = await Product.create(req.body);
+    
+//     res.send(newProduct);
+//   } catch (error){
+//     next(error)
+//   }
+// })
+
 router.get("/:productId", async (req, res, next) => {
   try {
     const singleProduct = await Product.findByPk(req.params.productId);

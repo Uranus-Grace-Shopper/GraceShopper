@@ -98,7 +98,7 @@ class AllProducts extends React.Component {
         <div className="div-all-products">
           {products.map((product) => (
             <div key={product.id} className="div-each-product">
-              {this.state.variety === product.variety ? (
+              {this.state.variety === product.variety && (
                 <div>
                   <img className="img-all-products" src={product.imageURL} />
                   <div className="txt-each-product">
@@ -119,9 +119,9 @@ class AllProducts extends React.Component {
                     ADD TO CART
                   </button>
                 </div>
-              ) : this.state.variety === "" ? (
+              )}
+              {this.state.variety === "" && (
                 <div>
-                  {" "}
                   <img className="img-all-products" src={product.imageURL} />
                   <div className="txt-each-product">
                     <div>
@@ -139,10 +139,8 @@ class AllProducts extends React.Component {
                     type="submit"
                   >
                     ADD TO CART
-                  </button>{" "}
+                  </button>
                 </div>
-              ) : (
-                <div></div>
               )}
             </div>
           ))}
