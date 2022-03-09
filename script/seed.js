@@ -31,6 +31,7 @@ const userData = [
   {
     username: "Joe",
     password: "123",
+    isAdmin: true,
   },
 ];
 
@@ -73,37 +74,45 @@ const wineData = [
     name: "Howell Mountain Cabernet Sauvignon",
     year: 2017,
     variety: "red",
-    description: "This wine is unmistakably rustic. On the nose, dominant notes of ripe blackberries, crème de cassis and dark chocolate truffles are complimented by bay leaf and fine leather. The complex and textured palate showcases flavors of blackberry crumble and star anise offset by earthy undertones and toasty oak. Built for your cellar, this wine will age gracefully over the years to come. The last to be harvested of all our wines, these grapes were hand-picked in late October. Fermentation took place in small open-top tanks, allowing for precise and gentle extraction of color and flavor. Each lot was aged in French oak barrels and evaluated individually, with the final blend occurring the summer of the following year. In total, the wine was aged for 26 months in barrel (82% new) and a year in bottle. Grape growing on Howell Mountain requires the practice of patience. On a sunny yet cool hillside, these inconspicuous vineyards surrounded by a thicket of Redwood trees yield highly concentrated fruit that takes longer to ripen. In 2017, abundant winter rainfall fueled vine growth early in the season. A mild spring, followed by steady warmth in the summer and fall, led to a slightly early harvest with ripe, fruit-driven intensity.",
+    description:
+      "This wine is unmistakably rustic. On the nose, dominant notes of ripe blackberries, crème de cassis and dark chocolate truffles are complimented by bay leaf and fine leather. The complex and textured palate showcases flavors of blackberry crumble and star anise offset by earthy undertones and toasty oak. Built for your cellar, this wine will age gracefully over the years to come. The last to be harvested of all our wines, these grapes were hand-picked in late October. Fermentation took place in small open-top tanks, allowing for precise and gentle extraction of color and flavor. Each lot was aged in French oak barrels and evaluated individually, with the final blend occurring the summer of the following year. In total, the wine was aged for 26 months in barrel (82% new) and a year in bottle. Grape growing on Howell Mountain requires the practice of patience. On a sunny yet cool hillside, these inconspicuous vineyards surrounded by a thicket of Redwood trees yield highly concentrated fruit that takes longer to ripen. In 2017, abundant winter rainfall fueled vine growth early in the season. A mild spring, followed by steady warmth in the summer and fall, led to a slightly early harvest with ripe, fruit-driven intensity.",
     quantity: 20,
     price: 150.0,
-    imageURL: "https://www.louismartini.com/dw/image/v2/BFWT_PRD/on/demandware.static/-/Sites-gallo-master-catalog/default/dw82275e90/images/00085000031568/00085000031568_2017_1.png?q=80"
+    imageURL:
+      "https://www.louismartini.com/dw/image/v2/BFWT_PRD/on/demandware.static/-/Sites-gallo-master-catalog/default/dw82275e90/images/00085000031568/00085000031568_2017_1.png?q=80",
   },
   {
     name: "Monte Rosso Vineyard Malbec",
     year: 2016,
     variety: "red",
-    description: "Enticing aromas of cedar, fresh plum and a hint of pepper. On the palate, lush notes of blackberry jam, dark roasted coffee and blackcurrant harmonize for a densely layered, full-bodied wine. ",
+    description:
+      "Enticing aromas of cedar, fresh plum and a hint of pepper. On the palate, lush notes of blackberry jam, dark roasted coffee and blackcurrant harmonize for a densely layered, full-bodied wine. ",
     quantity: 20,
     price: 70.0,
-    imageURL: "https://www.louismartini.com/dw/image/v2/BFWT_PRD/on/demandware.static/-/Sites-gallo-master-catalog/default/dw6035a94c/images/00085000015728/00085000015728_2016_0.png?sw=684&sh=910&sm=fit&q=65"
+    imageURL:
+      "https://www.louismartini.com/dw/image/v2/BFWT_PRD/on/demandware.static/-/Sites-gallo-master-catalog/default/dw6035a94c/images/00085000015728/00085000015728_2016_0.png?sw=684&sh=910&sm=fit&q=65",
   },
   {
     name: "Cellar No. 254 Merlot",
     year: 2018,
     variety: "red",
-    description: "Enchanting aromas of fresh blueberries, Bing cherries, and ripe red plum mingle with hints of violet and dried mint leaves as they dust the nose. These notes are echoed on the supple palate where polished tannins and flavors of boysenberry pie and raspberry, as well as subtleties of baking spice, vanilla and freshly shaved chocolate carry through the long, textured finish.",
+    description:
+      "Enchanting aromas of fresh blueberries, Bing cherries, and ripe red plum mingle with hints of violet and dried mint leaves as they dust the nose. These notes are echoed on the supple palate where polished tannins and flavors of boysenberry pie and raspberry, as well as subtleties of baking spice, vanilla and freshly shaved chocolate carry through the long, textured finish.",
     quantity: 20,
     price: 85.0,
-    imageURL: "https://www.louismartini.com/dw/image/v2/BFWT_PRD/on/demandware.static/-/Sites-gallo-master-catalog/default/dw404ab11b/images/00085000031124/00085000031124.png?sw=684&sh=910&sm=fit&q=65"
+    imageURL:
+      "https://www.louismartini.com/dw/image/v2/BFWT_PRD/on/demandware.static/-/Sites-gallo-master-catalog/default/dw404ab11b/images/00085000031124/00085000031124.png?sw=684&sh=910&sm=fit&q=65",
   },
   {
     name: "Napa Valley Sauvignon Blanc",
     year: 2019,
     variety: "white",
-    description: "Our grapes were picked in mid-to-late September, entirely by hand. At the winery, the grapes were pressed to tank, cold settled and racked off lees for fermentation. This gentle, oxygen-free process is utilized to maintain the wine’s signature crispness and fruit-forward character. Fermentation took place in a combination of stainless steel, oak barrel and concrete egg. A small amount of new French oak was used during barrel fermentation to build a rich and complex palate. Vintage 2019 was warm and evenly paced. Plentiful winter rains and a cool spring delayed budbreak, leading to rains in late May. By June, a consistently warm and steady summer emerged, setting the stage for expressive and vibrant wines. Vines developed clean, healthy clusters with rich, complex flavors and excellent structure. With exceptional growing conditions, harvest began later in the year and high-quality fruit was delivered into the cellar.",
+    description:
+      "Our grapes were picked in mid-to-late September, entirely by hand. At the winery, the grapes were pressed to tank, cold settled and racked off lees for fermentation. This gentle, oxygen-free process is utilized to maintain the wine’s signature crispness and fruit-forward character. Fermentation took place in a combination of stainless steel, oak barrel and concrete egg. A small amount of new French oak was used during barrel fermentation to build a rich and complex palate. Vintage 2019 was warm and evenly paced. Plentiful winter rains and a cool spring delayed budbreak, leading to rains in late May. By June, a consistently warm and steady summer emerged, setting the stage for expressive and vibrant wines. Vines developed clean, healthy clusters with rich, complex flavors and excellent structure. With exceptional growing conditions, harvest began later in the year and high-quality fruit was delivered into the cellar.",
     quantity: 20,
     price: 40.0,
-    imageURL: "https://www.louismartini.com/dw/image/v2/BFWT_PRD/on/demandware.static/-/Sites-gallo-master-catalog/default/dw9c20e6e4/images/00085000028094/00085000028094_2019_0.png?sw=684&sh=910&sm=fit&q=65"
+    imageURL:
+      "https://www.louismartini.com/dw/image/v2/BFWT_PRD/on/demandware.static/-/Sites-gallo-master-catalog/default/dw9c20e6e4/images/00085000028094/00085000028094_2019_0.png?sw=684&sh=910&sm=fit&q=65",
   },
 
   ///winery: Robert Mondavi
@@ -133,48 +142,58 @@ const wineData = [
     name: "Merlot Napa Valley",
     year: 2018,
     variety: "red",
-    description: "Sweet fruit notes of plum with touches of blueberry and dark chocolate, as well as velvety tannins and a beautiful salinity that begs you to take another sip.",
+    description:
+      "Sweet fruit notes of plum with touches of blueberry and dark chocolate, as well as velvety tannins and a beautiful salinity that begs you to take another sip.",
     quantity: 20,
     price: 29.0,
-    imageURL: "https://cdn.shopify.com/s/files/1/0540/2686/2769/products/Merlot_NapaValley_thumb_9d99c618-044b-4ad4-960e-cf3ba9c55003_720x.png?v=1620134606"
+    imageURL:
+      "https://cdn.shopify.com/s/files/1/0540/2686/2769/products/Merlot_NapaValley_thumb_9d99c618-044b-4ad4-960e-cf3ba9c55003_720x.png?v=1620134606",
   },
   {
     name: "Petit Verdot Oakville",
     year: 2015,
     variety: "red",
-    description: "Dark fruit notes of currant and plum meet earthy notes of licorice and cinnamon. Followed by light floral aromas and a touch of pleasant smokiness.",
+    description:
+      "Dark fruit notes of currant and plum meet earthy notes of licorice and cinnamon. Followed by light floral aromas and a touch of pleasant smokiness.",
     quantity: 20,
     price: 80.0,
-    imageURL: "https://cdn.shopify.com/s/files/1/0540/2686/2769/products/PetitVerdot_thumb_74dd5993-6df6-450e-a2a0-155f02ce243d_720x.png?v=1620133421"
+    imageURL:
+      "https://cdn.shopify.com/s/files/1/0540/2686/2769/products/PetitVerdot_thumb_74dd5993-6df6-450e-a2a0-155f02ce243d_720x.png?v=1620133421",
   },
   {
     name: "Clone 777 Pinot Noir Carneros Napa Valley",
     year: 2019,
     variety: "red",
-    description: "Initial smells of bright raspberry, red plum, earthy graphite, toasted graham cracker and hint of iris. Taste of black cherry, vanilla cola, spicy clove, salted plum, and toasted almonds with a dark brooding finish.",
+    description:
+      "Initial smells of bright raspberry, red plum, earthy graphite, toasted graham cracker and hint of iris. Taste of black cherry, vanilla cola, spicy clove, salted plum, and toasted almonds with a dark brooding finish.",
     quantity: 20,
     price: 55.0,
-    imageURL: "https://cdn.shopify.com/s/files/1/0540/2686/2769/products/PinotNoir_777_thumb_156205aa-861d-4c60-8626-f4b3559758fe_720x.png?v=1620134531"
+    imageURL:
+      "https://cdn.shopify.com/s/files/1/0540/2686/2769/products/PinotNoir_777_thumb_156205aa-861d-4c60-8626-f4b3559758fe_720x.png?v=1620134531",
   },
   {
     name: "To Kalon Reserve Fumé Blanc",
     year: 2019,
     variety: "white",
-    description: "Beautifully expressive on the nose. With smells of honey suckle, green papaya, and jasmine. Lively, complex and weighty on the palate with refreshing minerality, white peach, meyer lemon zest.",
+    description:
+      "Beautifully expressive on the nose. With smells of honey suckle, green papaya, and jasmine. Lively, complex and weighty on the palate with refreshing minerality, white peach, meyer lemon zest.",
     quantity: 20,
     price: 95.0,
-    imageURL: "https://cdn.shopify.com/s/files/1/0540/2686/2769/products/Thumbnail_RMW_Reserve_Fume_720x.png?v=1637369330"
+    imageURL:
+      "https://cdn.shopify.com/s/files/1/0540/2686/2769/products/Thumbnail_RMW_Reserve_Fume_720x.png?v=1637369330",
   },
   {
     name: "Unoaked Chardonnay",
     year: 2019,
     variety: "white",
-    description: "Fragrantly ripe summer peach and green apple flavors, with hints of lemon peel and minerality.",
+    description:
+      "Fragrantly ripe summer peach and green apple flavors, with hints of lemon peel and minerality.",
     quantity: 20,
     price: 34.0,
-    imageURL: "https://cdn.shopify.com/s/files/1/0540/2686/2769/products/Chard_Unoaked_thumb_0857c2a1-5345-4f8c-bce1-6aa576decbd3_720x.png?v=1620134895"
+    imageURL:
+      "https://cdn.shopify.com/s/files/1/0540/2686/2769/products/Chard_Unoaked_thumb_0857c2a1-5345-4f8c-bce1-6aa576decbd3_720x.png?v=1620134895",
   },
- 
+
   //white
   //winery: Domaine Carneros
   {
@@ -215,38 +234,46 @@ const wineData = [
     name: "Petit Verdot Napa Valley",
     year: 2017,
     variety: "red",
-    description: "Petit Verdot is a thick-skinned grape expressing a dense, deep ruby color. Aromas are dark and brooding, with blackberry, black cherry, fig, mocha, dried herbs, and savory truffles. Oak barrels contribute a caramel and toasted marshmallow nuance, along with some baking spices. The entry is juicy, with mouthwatering acidity. A rich midpalate leads to flavors of dark plum, black cherry, mocha, coffee, and dark chocolate. Ripe, pronounced tannins are present from start to finish.",
+    description:
+      "Petit Verdot is a thick-skinned grape expressing a dense, deep ruby color. Aromas are dark and brooding, with blackberry, black cherry, fig, mocha, dried herbs, and savory truffles. Oak barrels contribute a caramel and toasted marshmallow nuance, along with some baking spices. The entry is juicy, with mouthwatering acidity. A rich midpalate leads to flavors of dark plum, black cherry, mocha, coffee, and dark chocolate. Ripe, pronounced tannins are present from start to finish.",
     quantity: 15,
     price: 85.0,
-    imageURL: "https://www.pineridgevineyards.com/wp-content/uploads/2020/08/napa-valley-petit-verdot.png"
+    imageURL:
+      "https://www.pineridgevineyards.com/wp-content/uploads/2020/08/napa-valley-petit-verdot.png",
   },
   {
     name: "Malbec",
     year: 2017,
     variety: "red",
-    description: "The thick skin of Malbec grapes yields wine with a beautiful, nearly opaque, deep purple-red color. The wine shows signature aromas and flavors of dark fruit, raspberry, mocha, and tobacco. Full-bodied with moderate tannins, it is enjoyable by the glass or with food.",
+    description:
+      "The thick skin of Malbec grapes yields wine with a beautiful, nearly opaque, deep purple-red color. The wine shows signature aromas and flavors of dark fruit, raspberry, mocha, and tobacco. Full-bodied with moderate tannins, it is enjoyable by the glass or with food.",
     quantity: 15,
     price: 75.0,
-    imageURL: "https://www.pineridgevineyards.com/wp-content/uploads/2020/08/napa-valley-malbec.png"
+    imageURL:
+      "https://www.pineridgevineyards.com/wp-content/uploads/2020/08/napa-valley-malbec.png",
   },
   {
     name: "Tessitura Napa Valley",
     year: 2017,
     variety: "red",
-    description: "Brilliant ruby color in hue, our 2017 Tessitura opens with profuse aromas of cherry and cassis, with intriguing hints of sage, espresso bean and baking spices. The elegant, silky texture envelopes the bright red and dark fruit flavors on the palate. Lively acidity and supple tannins structure the wine and carry the plush flavors through a long, smooth finish. Beautifully balanced, this wine can complement many dishes, including roasted salmon, Moroccan braised lamb and truffle risotto.",
+    description:
+      "Brilliant ruby color in hue, our 2017 Tessitura opens with profuse aromas of cherry and cassis, with intriguing hints of sage, espresso bean and baking spices. The elegant, silky texture envelopes the bright red and dark fruit flavors on the palate. Lively acidity and supple tannins structure the wine and carry the plush flavors through a long, smooth finish. Beautifully balanced, this wine can complement many dishes, including roasted salmon, Moroccan braised lamb and truffle risotto.",
     quantity: 20,
     price: 75.0,
-    imageURL: "https://www.pineridgevineyards.com/wp-content/uploads/2020/08/Pine-Ridge-Tessitura_NV_300x1000.png"
+    imageURL:
+      "https://www.pineridgevineyards.com/wp-content/uploads/2020/08/Pine-Ridge-Tessitura_NV_300x1000.png",
   },
   {
     name: "Merlot Napa Valley",
     year: 2018,
     variety: "red",
-    description: "This wine sets out with aromas of blueberry, tomato leaf, and briary spices. On the palate, violet, cinnamon, and strawberry entice, alongside a vanilla finish. This wine is enchanting now and will drink well for at least four years.",
+    description:
+      "This wine sets out with aromas of blueberry, tomato leaf, and briary spices. On the palate, violet, cinnamon, and strawberry entice, alongside a vanilla finish. This wine is enchanting now and will drink well for at least four years.",
     quantity: 20,
     price: 65.0,
-    imageURL: "https://www.pineridgevineyards.com/wp-content/uploads/2020/08/Pine-Ridge-Merlot_NV.png"
-  }
+    imageURL:
+      "https://www.pineridgevineyards.com/wp-content/uploads/2020/08/Pine-Ridge-Merlot_NV.png",
+  },
 ];
 
 const wineryData = [
@@ -264,16 +291,7 @@ const wineryData = [
   },
 ];
 
-const cartData = [
-  {
-    isPurchased: true,
-    cartPriceTotal: 300.23,
-  },
-  {},
-  {},
-  {},
-  {},
-];
+const cartData = [{}, {}, {}, {}, {}, {}];
 
 /**
  * seed - this function clears the database, updates tables to
@@ -313,10 +331,33 @@ async function seed() {
 
   //set relationships:
   //winery can have many products:
-  await wineries[0].setProducts([products[0], products[1], products[2], products[3], products[4], products[5], products[6]]);
-  await wineries[1].setProducts([products[8], products[7], products[9], products[10], products[11], products[12], products[13]]);
+  await wineries[0].setProducts([
+    products[0],
+    products[1],
+    products[2],
+    products[3],
+    products[4],
+    products[5],
+    products[6],
+  ]);
+  await wineries[1].setProducts([
+    products[8],
+    products[7],
+    products[9],
+    products[10],
+    products[11],
+    products[12],
+    products[13],
+  ]);
   await wineries[2].setProducts([products[14]]);
-  await wineries[3].setProducts([products[15], products[16], products[17], products[18], products[19], products[20]]);
+  await wineries[3].setProducts([
+    products[15],
+    products[16],
+    products[17],
+    products[18],
+    products[19],
+    products[20],
+  ]);
 
   //a cart can have many products
   // await carts[0].addProducts([
@@ -331,10 +372,12 @@ async function seed() {
 
   // // seed relationship btw Cart and User
   // //a user can have many carts
-  // await users[0].setCarts([carts[0], carts[1]]);
-  // await users[1].setCarts(carts[3]);
-  // await users[2].setCarts(carts[4]);
-  // await users[3].setCarts(carts[2]);
+  await users[0].setCarts(carts[0]);
+  await users[1].setCarts(carts[1]);
+  await users[2].setCarts(carts[2]);
+  await users[3].setCarts(carts[3]);
+  await users[4].setCarts(carts[4]);
+  await users[5].setCarts(carts[5]);
 
   // set cart to see user connect to cart
 

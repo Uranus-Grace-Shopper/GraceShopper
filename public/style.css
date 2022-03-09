@@ -1,6 +1,9 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: rgb(255, 255, 255);
+  /* max-width: 80%;
+  display: flex;
+  align-self: center; */
 }
 
 a {
@@ -13,8 +16,8 @@ a {
 
 nav a {
   /* display: inline-block; */
-  margin: 1em;
-  width: 20%;
+  margin: 0.5em;
+  width: 30%;
   color: black;
 }
 
@@ -31,6 +34,12 @@ form div {
   flex-flow: row wrap;
   justify-content: center;
   gap: 50px 100px;
+}
+
+.each-wine-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .img-all-products {
@@ -137,9 +146,9 @@ nav a:hover {
 
 .logo {
   padding: 0px;
-  margin: 0px;
-  width: 50%;
-  height: 50%;
+  margin-top: 16px;
+  width: 110px;
+  height: 110px;
 }
 
 .container-main-page {
@@ -179,7 +188,8 @@ nav a:hover {
 }
 
 .img-confirmation {
-  width: 50%;
+  margin: 100px;
+  width: 30%;
   height: auto;
 }
 
@@ -306,4 +316,39 @@ td {
 .price-total-per-wine {
   color: rgb(85, 9, 116);
   font-weight: bold;
+}
+
+.conf {
+  text-align: center;
+  color: rgb(96, 60, 110);
+  font-size: 2em;
+  letter-spacing: 0.25em;
+  font-weight: 700;
+}
+
+.select-wine-label {
+  font-size: 20px;
+  margin-right: 10px;
+  letter-spacing: 0.1em;
+}
+
+.wine-drop {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.dropdown-winetype {
+  width: 70px;
+}
+
+#nav-login {
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+}
+
+#checkout-container {
+  display: flex;
+  justify-content: flex-end;
 }
