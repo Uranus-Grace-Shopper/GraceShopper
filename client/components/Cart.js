@@ -82,23 +82,20 @@ class Cart extends React.Component {
           ))}
         </div>
 
-        <hr />
-        <div className="cart-total-price">
-          <p>CART TOTAL: </p>
+        <div id="checkout-container">
+          <Link to={`/cart/checkout`}>
+            <button
+              className="btn-large"
+              onClick={() => {
+                Object.keys(userInfo).length === 0
+                  ? this.handleClickCheckout()
+                  : this.props.checkout(this.props.cart);
+              }}
+            >
+              CHECKOUT
+            </button>
+          </Link>
         </div>
-
-        <Link to={`/cart/checkout`}>
-          <button
-            className="btn-large"
-            onClick={() => {
-              Object.keys(userInfo).length === 0
-                ? this.handleClickCheckout()
-                : this.props.checkout(this.props.cart);
-            }}
-          >
-            CHECKOUT
-          </button>
-        </Link>
       </div>
     );
   }

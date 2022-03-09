@@ -24,10 +24,13 @@ const Navbar = ({ handleClick, isLoggedIn, username, isAdmin }) => (
           </a>
         </div>
       ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+        <div id="nav-login">
+          <Link id="login-text" to="/login">
+            Login
+          </Link>
+          <Link id="signup-text" to="/signup">
+            Sign-Up
+          </Link>
         </div>
       )}
       <div className="cart">

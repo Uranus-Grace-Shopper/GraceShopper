@@ -83,23 +83,26 @@ class AllProducts extends React.Component {
 
     return (
       <div>
-        <label>Select wine type:</label>
+        <div className="wine-drop">
+          <label className="select-wine-label">Select Wine Type: </label>
 
-        <select
-          value={this.state.variety}
-          name="variety"
-          onChange={this.handleChange}
-        >
-          <option />
-          <option>red</option>
-          <option>white</option>
-        </select>
+          <select
+            className="dropdown-winetype"
+            value={this.state.variety}
+            name="variety"
+            onChange={this.handleChange}
+          >
+            <option />
+            <option>red</option>
+            <option>white</option>
+          </select>
+        </div>
 
         <div className="div-all-products">
           {products.map((product) => (
             <div key={product.id} className="div-each-product">
               {this.state.variety === product.variety && (
-                <div>
+                <div className="each-wine-div">
                   <img className="img-all-products" src={product.imageURL} />
                   <div className="txt-each-product">
                     <div>
@@ -121,7 +124,7 @@ class AllProducts extends React.Component {
                 </div>
               )}
               {this.state.variety === "" && (
-                <div>
+                <div className="each-wine-div">
                   {" "}
                   <img className="img-all-products" src={product.imageURL} />
                   <div className="txt-each-product">
