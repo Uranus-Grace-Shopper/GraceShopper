@@ -38,9 +38,10 @@ router.post("/:productId", requireToken, async (req, res, next) => {
   try {
     // console.log(req.user.dataValues.id, "token is hereeeee")
     const singleProduct = await Product.findByPk(req.params.productId);
+    console.log(req.user.id);
     const cart = await Cart.findOne({
       where: {
-        userId: req.user.dataValues.id,
+        userId: req.user.id,
         isPurchased: false,
       },
     });

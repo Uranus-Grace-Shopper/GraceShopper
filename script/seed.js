@@ -291,16 +291,7 @@ const wineryData = [
   },
 ];
 
-const cartData = [
-  {
-    isPurchased: true,
-    cartPriceTotal: 300.23,
-  },
-  {},
-  {},
-  {},
-  {},
-];
+const cartData = [{}, {}, {}, {}, {}, {}];
 
 /**
  * seed - this function clears the database, updates tables to
@@ -381,10 +372,12 @@ async function seed() {
 
   // // seed relationship btw Cart and User
   // //a user can have many carts
-  // await users[0].setCarts([carts[0], carts[1]]);
-  // await users[1].setCarts(carts[3]);
-  // await users[2].setCarts(carts[4]);
-  // await users[3].setCarts(carts[2]);
+  await users[0].setCarts(carts[0]);
+  await users[1].setCarts(carts[1]);
+  await users[2].setCarts(carts[2]);
+  await users[3].setCarts(carts[3]);
+  await users[4].setCarts(carts[4]);
+  await users[5].setCarts(carts[5]);
 
   // set cart to see user connect to cart
 
